@@ -11,10 +11,6 @@ function formatDate(date) {
   return `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`;
 }
 
-function formatDateTime(date) {
-  return `${formatDate(date)} ${String(date.getHours()).padStart(2, "0")}:${String(date.getMinutes()).padStart(2, "0")}`;
-}
-
 const STEM_ELEMENT = {
   甲: "wood",
   乙: "wood",
@@ -168,7 +164,7 @@ function renderMajorLuck(luck) {
         <span>${escapeHtml(luck.direction.label)}・開始 ${luck.start.age}歳</span>
       </div>
       <p class="subnote">
-        起算: ${escapeHtml(luck.start.target.name)}（${formatDateTime(luck.start.target.date)}）までの日数を3で割って算出
+        立運: 節入日より${luck.start.dayNumber}日目生まれ。${escapeHtml(luck.start.formula)}を切り上げて算出
       </p>
       <div class="table-wrap">
         <table>
@@ -258,7 +254,7 @@ export function renderResult(target, { chart, majorLuck, annualLuck, profile, in
       <div>
         <p class="eyebrow">鑑定対象</p>
         <h1>${formatDate(chart.date)} ${escapeHtml(birthTimeLabel)}</h1>
-        <p>節入り: ${escapeHtml(chart.monthBoundary.name)} / 空亡: ${escapeHtml(chart.voidBranches.join("・"))}</p>
+        <p>節入り: ${escapeHtml(chart.monthBoundary.name)} / 節入日より${chart.setsuiriDayInfo.dayNumber}日目 / 空亡: ${escapeHtml(chart.voidBranches.join("・"))}</p>
       </div>
     </div>
     ${renderPillarTable(chart)}

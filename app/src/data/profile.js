@@ -1,13 +1,14 @@
 export const defaultProfile = {
-  id: "general-default",
-  name: "一般標準プロファイル",
+  id: "kurokawa-default",
+  name: "黒川式プロファイル",
   basis: {
     tenGodStandard: "dayStem",
     monthBoundary: "setsuiri",
     birthTime: "optional",
     unknownTime: "hideTimePillar",
     luckDirection: "yearStemYinYangAndSex",
-    luckStartAge: "daysToNearestSetsuiriDividedByThree",
+    luckStartAge: "kurokawaSetsuiriDayNumber",
+    hiddenStems: "kurokawaMonthLawTable",
   },
   display: {
     pillars: ["year", "month", "day", "time"],

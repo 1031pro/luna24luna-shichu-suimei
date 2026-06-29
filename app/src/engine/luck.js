@@ -1,29 +1,13 @@
 import { getKanshi, getTenGod, normalizeMod, STEMS, YIN_YANG } from "../data/kanshi.js";
 import { getAnnualPillar } from "./chart.js";
-import { getSurroundingSetsuiri } from "./setsuiri.js";
-
-function daysBetween(a, b) {
-  return Math.abs(b - a) / 86400000;
-}
+import { getKurokawaLuckDirection, getKurokawaMajorLuckStart } from "./kurokawa.js";
 
 function getLuckDirection(chart, sex) {
-  const yearStemYinYang = chart.pillarMap.year.stemYinYang;
-  const forward = (sex === "male" && yearStemYinYang === "陽") || (sex === "female" && yearStemYinYang === "陰");
-  return {
-    forward,
-    label: forward ? "順行" : "逆行",
-  };
+  return getKurokawaLuckDirection(chart.pillarMap.year.stemYinYang, sex);
 }
 
-function getMajorLuckStartAge(chart, setsuiri, direction) {
-  const { previous, next } = getSurroundingSetsuiri(setsuiri, chart.date);
-  const target = direction.forward ? next : previous;
-  const diffDays = daysBetween(chart.date, target.date);
-  return {
-    age: Math.max(1, Math.ceil(diffDays / 3)),
-    target,
-    diffDays,
-  };
+function getMajorLuckStartAge(chart, _setsuiri, direction) {
+  return getKurokawaMajorLuckStart(chart.setsuiriDayInfo.dayNumber, direction, chart.setsuiriDayInfo.boundary);
 }
 
 function enrichLuckPillar(pillar, dayStemIndex) {

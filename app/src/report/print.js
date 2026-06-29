@@ -612,7 +612,7 @@ export function printReport({ chart, majorLuck, annualLuck, interpretation, prof
                 </div>
                 <div class="panel flow-panel">
                   <h3>現在の大運</h3>
-                  <p>現在の大運は${currentMajorLuck.ageStart}歳から${currentMajorLuck.ageEnd}歳まで、干支は${escapeHtml(currentMajorLuck.pillar.label)}、通変星は${escapeHtml(currentMajorLuck.pillar.tenGod)}です。</p>
+                  <p>現在の大運は${currentMajorLuck.ageStart}歳から${currentMajorLuck.ageEnd}歳まで、干支は${escapeHtml(currentMajorLuck.pillar.label)}、通変星は${escapeHtml(currentMajorLuck.pillar.tenGod)}です。立運は節入日より${majorLuck.start.dayNumber}日目生まれとして、${escapeHtml(majorLuck.start.formula)}を切り上げて算出しています。</p>
                 </div>
                 <h2>大運一覧</h2>
                 <table class="mini-table">

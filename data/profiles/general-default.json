@@ -1,7 +1,7 @@
 {
-  "profileId": "general-default",
-  "profileName": "一般標準設定",
-  "description": "新規制作時の初期値。日干基準の通変星、節入りによる月切替、出生時刻入力ありを基本とする。",
+  "profileId": "kurokawa-default",
+  "profileName": "黒川式設定",
+  "description": "luna24luna様向け。確認済み画像資料に基づき、黒川式の蔵干、空亡、時柱、立運年数を適用する。",
   "birthTime": {
     "enabled": true,
     "required": false,
@@ -18,15 +18,15 @@
     "showHiddenStemTenGods": true
   },
   "hiddenStems": {
-    "table": "standard",
-    "switchingMethod": "setsuiri_elapsed_days",
+    "table": "kurokawa_month_law",
+    "switchingMethod": "kurokawa_setsuiribi_day_number",
     "showAllHiddenStems": false,
     "showMainHiddenStemOnly": true
   },
   "majorLuck": {
     "enabled": true,
     "directionBase": "yearStemAndSex",
-    "startAgeRounding": "ceil",
+    "startAgeRounding": "kurokawa_ceil",
     "firstLuckStartsFromMonthPillar": true,
     "maxDisplayAge": 100
   },
