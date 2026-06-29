@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>プロファイル鑑定 - 命式</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="page-wrapper">
+        <div class="container">
+            <h1>プロファイル鑑定</h1>
+            
+            <div class="input-form">
+                <div class="form-group">
+                    <label for="birth_year">生年月日:</label>
+                    <div class="date-inputs">
+                        <select id="birth_year"></select>年
+                        <select id="birth_month"></select>月
+                        <select id="birth_day"></select>日
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>性別:</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="sex" value="1" checked> 男性
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="sex" value="2"> 女性
+                        </label>
+                    </div>
+                </div>
+                
+                <button onclick="calculateMeishiki()" class="calculate-button">命式を計算</button>
+            </div>
+
+            <div class="meishiki-container" id="resultsContainer" style="display: none;">
+                <h2 id="meishikiTitle">①命式</h2>
+                <div id="basicInfo"></div>
+                <div class="table-container">
+                    <table id="meishikiTable">
+                        <tr id="tenkanRow"></tr>
+                        <tr id="chishiRow"></tr>
+                        <tr id="kanshiNumRow"></tr>
+                        <tr id="zokanRow"></tr>
+                        <tr id="tsuhenRow"></tr>
+                        <tr id="zokanTsuhenRow"></tr>
+                        <tr id="junniRow"></tr>
+                        <!-- 天中殺行などもここに追加される -->
+                    </table>
+                </div>
+                <div class="copyright">©Yukari Ikemotoのデザイン帝王学</div>
+                
+                <!-- 暦のリンクボタン -->
+                <div class="koyomi-link-container">
+                    <a href="https://www.beland.jp/koyomi/" target="_blank" class="koyomi-link-button">
+                        暦を知りたい方はコチラ
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- フッター -->
+        <footer class="site-footer">
+            <p>© 2025 池本紫｜デザイン帝王学　　　　株式会社ビーランド</p>
+        </footer>
+    </div>
+
+    <script src="kanshi_data.js"></script>
+    <script src="meishiki.js"></script>
+    <script>
+        // 年・月・日の選択肢を生成
+        function generateDateOptions() {
+            const yearSelect = document.getElementById('birth_year');
+            const monthSelect = document.getElementById('birth_month');
+            const daySelect = document.getElementById('birth_day');
+            
+            // 年（1900年から2100年まで）
+            for (let year = 1900; year <= 2100; year++) {
+                const option = document.createElement('option');
+                option.value = year;
+                option.textContent = year;
+                if (year === 1980) option.selected = true; // デフォルト値
+                yearSelect.appendChild(option);
+            }
+            
+            // 月（1月から12月まで）
+            for (let month = 1; month <= 12; month++) {
+                const option = document.createElement('option');
+                option.value = month;
+                option.textContent = month;
+                if (month === 1) option.selected = true; // デフォルト値
+                monthSelect.appendChild(option);
+            }
+            
+            // 日（1日から31日まで）
+            for (let day = 1; day <= 31; day++) {
+                const option = document.createElement('option');
+                option.value = day;
+                option.textContent = day;
+                if (day === 1) option.selected = true; // デフォルト値
+                daySelect.appendChild(option);
+            }
+        }
+
+        // 命式を計算して表示
+        function calculateMeishiki() {
+            try {
+                const year = parseInt(document.getElementById('birth_year').value);
+                const month = parseInt(document.getElementById('birth_month').value);
+                const day = parseInt(document.getElementById('birth_day').value);
+                const sex = parseInt(document.querySelector('input[name="sex"]:checked').value);
+                
+                const birthdate = new Date(year, month - 1, day);
+                
+                // 命式を計算
+                const meishiki = new Meishiki(birthdate, null, sex);
+                meishiki.displayMeishiki();
+                
+                // 結果を表示
+                document.getElementById('resultsContainer').style.display = 'block';
+                document.getElementById('meishikiTitle').style.display = 'block';
+                
+            } catch (error) {
+                console.error('命式の計算でエラーが発生しました:', error);
+                alert('命式の計算でエラーが発生しました: ' + error.message);
+            }
+        }
+
+        // ページ読み込み時に日付選択肢を生成
+        document.addEventListener('DOMContentLoaded', generateDateOptions);
+    </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+{
+  "profileId": "general-default",
+  "profileName": "一般標準設定",
+  "description": "新規制作時の初期値。日干基準の通変星、節入りによる月切替、出生時刻入力ありを基本とする。",
+  "birthTime": {
+    "enabled": true,
+    "required": false,
+    "unknownTimeMode": "hide_time_pillar"
+  },
+  "calendar": {
+    "monthBoundary": "setsuiri",
+    "setsuiriDataSource": "naoj_generated_static_data",
+    "timezone": "Asia/Tokyo"
+  },
+  "tenGods": {
+    "baseStem": "day",
+    "showHeavenlyStemTenGods": true,
+    "showHiddenStemTenGods": true
+  },
+  "hiddenStems": {
+    "table": "standard",
+    "switchingMethod": "setsuiri_elapsed_days",
+    "showAllHiddenStems": false,
+    "showMainHiddenStemOnly": true
+  },
+  "majorLuck": {
+    "enabled": true,
+    "directionBase": "yearStemAndSex",
+    "startAgeRounding": "ceil",
+    "firstLuckStartsFromMonthPillar": true,
+    "maxDisplayAge": 100
+  },
+  "annualLuck": {
+    "enabled": true,
+    "highlightCurrentYear": true,
+    "maxDisplayAge": 100
+  },
+  "display": {
+    "pillarOrder": "year_month_day_time",
+    "showFiveElements": true,
+    "showYinYang": true,
+    "showVoid": true,
+    "showCurrentMajorLuck": true,
+    "showCurrentAnnualLuck": true
+  }
+}

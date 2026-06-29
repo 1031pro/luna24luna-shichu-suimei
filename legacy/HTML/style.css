@@ -1,0 +1,1128 @@
+/* 基本スタイル */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+body {
+  background: #FFFFFF;
+  color: #243673;
+  font-family: 'Segoe UI', 'Hiragino Sans', 'Meiryo', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 2000px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Meiryo', 'Hiragino Sans', sans-serif;
+  overflow-x: hidden;
+  width: 100%;
+  box-sizing: border-box;
+  flex: 1;
+}
+
+h1, h2, h3 {
+  color: #00A3A5;
+  margin-bottom: 16px;
+  font-size: 1.6em;
+}
+
+h1 {
+  font-size: 1.8em;
+  text-align: center;
+}
+
+/* 入力フォーム */
+.input-form {
+  background: #FFFEF0;
+  border: 2px solid #FFCC66;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(36, 54, 115, 0.08);
+  padding: 24px;
+  margin-bottom: 32px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 800px;
+  box-sizing: border-box;
+}
+
+.form-group label {
+  color: #243673;
+  font-weight: bold;
+}
+
+input, select {
+  border: 1.5px solid #00A3A5;
+  border-radius: 6px;
+  padding: 4px 8px;
+  background: #ffffff;
+  color: #243673;
+  margin-right: 8px;
+}
+
+input[type="radio"] {
+  accent-color: #00A3A5;
+}
+
+button {
+  background: linear-gradient(90deg, #FFA500 60%, #FFD700 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 24px;
+  font-size: 1.1em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 8px;
+}
+
+button:hover {
+  background: linear-gradient(90deg, #FFCC66 60%, #FFFF99 100%);
+}
+
+/* 2列レイアウト */
+.two-column-layout {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.left-column, .right-column {
+  flex: 1;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.top-row {
+  display: flex;
+  gap: 32px;
+  margin-bottom: 24px;
+}
+
+/* 各コンテナの基本スタイル */
+.daiun-container,
+#tsuhenChartContainer,
+#triangleContainer,
+#actionKeywordsContainer {
+  background: #FFFEF0;
+  border: 2px solid #FFCC66;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(36, 54, 115, 0.08);
+  padding: 24px;
+  margin-bottom: 24px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* 命式コンテナの幅を入力欄と同じに統一 */
+.meishiki-container {
+  background: #FFFEF0;
+  border: 2px solid #FFCC66;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(36, 54, 115, 0.08);
+  padding: 24px;
+  margin-bottom: 24px;
+  width: 800px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+.content-box {
+  width: 900px;
+  max-width: 900px;
+  box-sizing: border-box;
+  overflow: hidden;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* 命式テーブル */
+#meishikiTable {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 4px;
+  box-shadow: 0 2px 8px rgba(36, 54, 115, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  table-layout: fixed;
+  font-size: 14px;
+}
+
+/* 命式テーブル内のすべての要素の文字サイズを統一 */
+#meishikiTable * {
+  font-size: 14px !important;
+}
+
+/* テーブルの横スクロール対応 */
+.meishiki-container {
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+.meishiki-container table {
+  min-width: 600px;
+}
+
+#meishikiTable th,
+#meishikiTable td {
+  min-width: 80px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+#meishikiTable th {
+  background: linear-gradient(135deg, #7583c4, #4b5db3);
+  color: #ffffff;
+  padding: 12px 8px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+#meishikiTable td {
+  padding: 8px;
+  text-align: center;
+  color: #243673;
+  border-bottom: 1.5px solid #FFCC66;
+  background: #ffffff;
+  white-space: pre-line;
+  word-break: keep-all;
+  line-height: 1.2;
+  font-size: 14px;
+}
+
+/* 五行セル - 着色を確実に表示 */
+.meishiki-container .wood-cell {
+  background: linear-gradient(135deg, #82D384, #44B547) !important;
+  color: #ffffff !important;
+}
+
+.meishiki-container .fire-cell {
+  background: linear-gradient(135deg, #FF8A84, #F0423A) !important;
+  color: #ffffff !important;
+}
+
+.meishiki-container .earth-cell {
+  background: linear-gradient(135deg, #FFDB41, #EDB200) !important;
+  color: #ffffff !important;
+}
+
+.meishiki-container .metal-cell {
+  background: linear-gradient(135deg, #D88EE3, #B54CC4) !important;
+  color: #ffffff !important;
+}
+
+.meishiki-container .water-cell {
+  background: linear-gradient(135deg, #41CBFF, #00A0E8) !important;
+  color: #ffffff !important;
+}
+
+/* 行ヘッダー - 着色を確実に表示 */
+.meishiki-container .row-header-1,
+.meishiki-container .row-header-2,
+.meishiki-container .row-header-3,
+.meishiki-container .row-header-4,
+.meishiki-container .row-header-5,
+.meishiki-container .row-header-6,
+.meishiki-container .row-header-7,
+.meishiki-container .row-header-8 {
+  background: linear-gradient(135deg, #7583c4, #4b5db3) !important;
+  color: #ffffff !important;
+  min-width: 100px;
+  text-align: center;
+  padding: 8px 4px;
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+/* 大運テーブルの罫線を確実に表示 */
+.daiun-container table {
+  border-collapse: collapse !important;
+  border-spacing: 0 !important;
+  width: 100% !important;
+}
+
+.daiun-container table th,
+.daiun-container table td {
+  border: 1px solid #FFCC66 !important;
+  padding: 8px !important;
+  text-align: center !important;
+}
+
+.daiun-container table th {
+  background: linear-gradient(135deg, #7583c4, #4b5db3) !important;
+  color: #ffffff !important;
+  font-weight: bold !important;
+}
+
+.daiun-container table td {
+  background: #ffffff !important;
+  color: #243673 !important;
+}
+
+/* 行動キーワード表 */
+.action-keywords-table-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+  width: 100%;
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+/* 行動キーワード表の横スクロール対応 */
+.action-keywords-table-container {
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+#actionKeywordsTable {
+  min-width: 800px;
+  width: 100%;
+  max-width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  border-radius: 0;
+  overflow: visible;
+  box-shadow: 0 2px 8px rgba(36, 54, 115, 0.1);
+  table-layout: fixed;
+}
+
+#actionKeywordsTable th,
+#actionKeywordsTable td {
+  border: 1px solid #FFCC66;
+  padding: 12px 8px;
+  text-align: center;
+  font-size: 16px;
+  line-height: 1.2;
+  min-width: 80px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* 角のセル */
+.corner-cell {
+  background: #ffffff;
+  position: relative;
+  width: 80px;
+  height: 80px;
+  min-width: 80px;
+  min-height: 80px;
+  border: 1px solid #FFCC66 !important;
+}
+
+.corner-cell::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom left, transparent 49.5%, #FFCC66 49.5%, #FFCC66 50.5%, transparent 50.5%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.corner-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.corner-top {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 12px;
+  color: #243673;
+}
+
+.corner-bottom {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  font-size: 12px;
+  color: #243673;
+}
+
+/* 五行のヘッダー色 */
+.wood-header {
+  background: #E8F5E8;
+  color: #243673;
+  font-weight: bold;
+}
+
+.fire-header {
+  background: #FFE4E1;
+  color: #243673;
+  font-weight: bold;
+}
+
+.earth-header {
+  background: #FFFACD;
+  color: #243673;
+  font-weight: bold;
+}
+
+.metal-header {
+  background: #F8F8FF;
+  color: #243673;
+  font-weight: bold;
+}
+
+.water-header {
+  background: #F0F8FF;
+  color: #243673;
+  font-weight: bold;
+}
+
+/* 基本情報と追加情報 */
+#basicInfo, #additionalInfo {
+  background: #FFFEF0;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+  color: #243673;
+}
+
+/* 三角形コンテナ */
+.triangle-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 0;
+  overflow: hidden;
+  max-width: none;
+}
+
+#triangleCanvas {
+  max-width: none;
+  max-height: none;
+  aspect-ratio: 1;
+  display: block;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* チャート */
+#tsuhenChart {
+  max-width: 100%;
+  margin: 0 auto;
+  display: block;
+  box-sizing: border-box;
+}
+
+/* ③ソシアルメーターの円グラフ内の文字を命式の行タイトルくらいの大きさに */
+#tsuhenChart {
+  font-size: 1.6em;
+}
+
+/* 円グラフ内の文字を確実に大きくする */
+#tsuhenChart text,
+#tsuhenChart tspan,
+#tsuhenChart .chart-text {
+  font-size: 1.6em !important;
+  font-weight: bold !important;
+}
+
+/* より強力な円グラフ文字サイズ設定 */
+#tsuhenChartContainer svg text,
+#tsuhenChartContainer svg tspan,
+#tsuhenChartContainer canvas {
+  font-size: 1.6em !important;
+  font-weight: bold !important;
+}
+
+/* 円グラフ内のすべてのテキスト要素を対象に */
+#tsuhenChartContainer * {
+  font-size: 1.6em !important;
+}
+
+/* ③ソシアルメーターのコピーライトを他のものと同じサイズに */
+#tsuhenChartContainer .copyright {
+  font-size: 0.7em !important;
+}
+
+/* コピーライト */
+.copyright {
+  font-family: 'Meiryo', 'Hiragino Sans', sans-serif;
+  font-size: 0.7em;
+  color: #243673;
+  text-align: center;
+  margin-top: 16px;
+  padding-top: 8px;
+  border-top: 1px solid #FFCC66;
+}
+
+/* 暦のリンクボタン */
+.koyomi-link-container {
+  text-align: center;
+  margin-top: 24px;
+  padding-top: 16px;
+}
+
+.koyomi-link-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(90deg, #4CAF50, #45a049);
+  color: #ffffff;
+  text-decoration: none;
+  padding: 20px 40px;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 18px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+  min-width: 200px;
+  min-height: 60px;
+  text-align: center;
+}
+
+.koyomi-link-button:hover {
+  background: linear-gradient(90deg, #45a049, #4CAF50);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+}
+
+.koyomi-link-button:active {
+  transform: translateY(0);
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 800px) {
+  .container {
+    padding: 10px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .two-column-layout {
+    flex-direction: column !important;
+    gap: 16px !important;
+  }
+
+  .top-row {
+    flex-direction: column !important;
+    gap: 16px !important;
+  }
+
+  .meishiki-container, .daiun-container {
+    margin: 0 0 16px 0 !important;
+    padding: 16px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .content-box {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 16px !important;
+    box-sizing: border-box !important;
+  }
+
+  #meishikiTable {
+    font-size: 14px !important;
+    border-spacing: 2px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    table-layout: auto !important;
+  }
+
+  #meishikiTable th,
+  #meishikiTable td {
+    min-width: auto !important;
+    padding: 8px 4px !important;
+    font-size: 14px !important;
+    word-break: break-all !important;
+  }
+
+  /* より強力な文字サイズ設定 */
+  #meishikiTable * {
+    font-size: 14px !important;
+  }
+
+  #meishikiTable th,
+  #meishikiTable td,
+  #meishikiTable span,
+  #meishikiTable div {
+    font-size: 14px !important;
+    line-height: 1.2 !important;
+  }
+
+  .meishiki-container .row-header-1,
+  .meishiki-container .row-header-2,
+  .meishiki-container .row-header-3,
+  .meishiki-container .row-header-4,
+  .meishiki-container .row-header-5,
+  .meishiki-container .row-header-6,
+  .meishiki-container .row-header-7,
+  .meishiki-container .row-header-8 {
+    min-width: 60px !important;
+    font-size: 14px !important;
+    padding: 8px 4px !important;
+  }
+
+  #actionKeywordsTable {
+    font-size: 14px !important;
+    margin: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    table-layout: auto !important;
+  }
+
+  #actionKeywordsTable th,
+  #actionKeywordsTable td {
+    min-width: auto !important;
+    padding: 8px 4px !important;
+    font-size: 14px !important;
+    word-break: break-all !important;
+  }
+
+  .corner-cell {
+    width: 50px !important;
+    height: 50px !important;
+    min-width: 50px !important;
+    min-height: 50px !important;
+  }
+
+  #tsuhenChart {
+    max-width: 100% !important;
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  #triangleCanvas {
+    max-width: 100% !important;
+    width: 100% !important;
+    height: auto !important;
+    margin: 0 auto !important;
+    display: block !important;
+    box-sizing: border-box !important;
+  }
+
+  .copyright {
+    font-size: 0.8em !important;
+    margin-top: 12px !important;
+    padding-top: 6px !important;
+  }
+
+  .input-form {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 0 20px 0 !important;
+    padding: 16px !important;
+    box-sizing: border-box !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 5px !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
+  }
+
+  body {
+    overflow-x: hidden !important;
+  }
+
+  .meishiki-container,
+  .daiun-container,
+  #tsuhenChartContainer,
+  #triangleContainer,
+  #actionKeywordsContainer {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 0 12px 0 !important;
+    padding: 12px !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+  }
+
+  /* スマホ用：テーブルを画面幅に収める（②と同じ文字サイズ） */
+  .meishiki-container {
+    overflow: visible !important;
+  }
+
+  .meishiki-container table {
+    min-width: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    table-layout: auto !important;
+    font-size: 14px !important;
+  }
+
+  #meishikiTable {
+    font-size: 14px !important;
+    border-spacing: 2px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    table-layout: auto !important;
+    overflow: visible !important;
+  }
+
+  #meishikiTable th,
+  #meishikiTable td {
+    min-width: auto !important;
+    padding: 8px 4px !important;
+    font-size: 14px !important;
+    word-break: break-all !important;
+    max-width: 80px !important;
+  }
+
+  /* より強力な文字サイズ設定 */
+  #meishikiTable * {
+    font-size: 14px !important;
+  }
+
+  #meishikiTable th,
+  #meishikiTable td,
+  #meishikiTable span,
+  #meishikiTable div {
+    font-size: 14px !important;
+    line-height: 1.2 !important;
+  }
+
+  .meishiki-container .row-header-1,
+  .meishiki-container .row-header-2,
+  .meishiki-container .row-header-3,
+  .meishiki-container .row-header-4,
+  .meishiki-container .row-header-5,
+  .meishiki-container .row-header-6,
+  .meishiki-container .row-header-7,
+  .meishiki-container .row-header-8 {
+    min-width: 60px !important;
+    max-width: 60px !important;
+    font-size: 14px !important;
+    padding: 8px 4px !important;
+  }
+
+  /* 行動キーワード表を画面幅に収める */
+  .action-keywords-table-container {
+    overflow: visible !important;
+  }
+
+  #actionKeywordsTable {
+    font-size: 14px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: auto !important;
+    table-layout: auto !important;
+    overflow: visible !important;
+  }
+
+  #actionKeywordsTable th,
+  #actionKeywordsTable td {
+    min-width: auto !important;
+    max-width: 70px !important;
+    padding: 6px 3px !important;
+    font-size: 14px !important;
+    word-break: break-all !important;
+  }
+
+  .corner-cell {
+    width: 35px !important;
+    height: 35px !important;
+    min-width: 35px !important;
+    min-height: 35px !important;
+    max-width: 35px !important;
+    max-height: 35px !important;
+  }
+
+  .corner-top,
+  .corner-bottom {
+    font-size: 6px !important;
+  }
+
+  .copyright {
+    font-size: 0.7em !important;
+    margin-top: 8px !important;
+    padding-top: 4px !important;
+  }
+
+  h1 {
+    font-size: 1.4em !important;
+    margin-bottom: 12px !important;
+  }
+
+  h2, h3 {
+    font-size: 1.2em !important;
+    margin-bottom: 10px !important;
+  }
+
+  .input-form {
+    padding: 12px !important;
+    margin-bottom: 16px !important;
+  }
+
+  button {
+    padding: 6px 16px !important;
+    font-size: 1em !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 3px !important;
+  }
+
+  .meishiki-container,
+  .daiun-container,
+  #tsuhenChartContainer,
+  #triangleContainer,
+  #actionKeywordsContainer {
+    padding: 8px !important;
+    margin-bottom: 8px !important;
+  }
+
+  /* さらに小さなスマホ用（②と同じ文字サイズ） */
+  #meishikiTable {
+    font-size: 14px !important;
+    border-spacing: 2px !important;
+  }
+
+  #meishikiTable th,
+  #meishikiTable td {
+    padding: 6px 3px !important;
+    font-size: 14px !important;
+    max-width: 70px !important;
+  }
+
+  /* より強力な文字サイズ設定 */
+  #meishikiTable * {
+    font-size: 14px !important;
+  }
+
+  #meishikiTable th,
+  #meishikiTable td,
+  #meishikiTable span,
+  #meishikiTable div {
+    font-size: 14px !important;
+    line-height: 1.2 !important;
+  }
+
+  .meishiki-container .row-header-1,
+  .meishiki-container .row-header-2,
+  .meishiki-container .row-header-3,
+  .meishiki-container .row-header-4,
+  .meishiki-container .row-header-5,
+  .meishiki-container .row-header-6,
+  .meishiki-container .row-header-7,
+  .meishiki-container .row-header-8 {
+    min-width: 50px !important;
+    max-width: 50px !important;
+    font-size: 14px !important;
+    padding: 6px 3px !important;
+  }
+
+  #actionKeywordsTable {
+    font-size: 14px !important;
+  }
+
+  #actionKeywordsTable th,
+  #actionKeywordsTable td {
+    padding: 6px 3px !important;
+    font-size: 14px !important;
+    max-width: 70px !important;
+  }
+
+  .corner-cell {
+    width: 30px !important;
+    height: 30px !important;
+    min-width: 30px !important;
+    min-height: 30px !important;
+    max-width: 30px !important;
+    max-height: 30px !important;
+  }
+
+  .corner-top,
+  .corner-bottom {
+    font-size: 5px !important;
+  }
+
+  h1 {
+    font-size: 1.2em !important;
+  }
+
+  h2, h3 {
+    font-size: 1.1em !important;
+  }
+}
+
+/* 印刷用のスタイル */
+@media print {
+  /* 色を強制印刷 */
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+
+  /* Flex系の親要素をブロック化して改ページを有効にする */
+  .top-row,
+  .two-column-layout,
+  .content-row,
+  .content-box,
+  .table-container {
+    display: block !important;
+    float: none !important;
+  }
+
+  /* 各セクションは分割されないようにして、明示的に改ページ */
+  .meishiki-container,
+  .daiun-container,
+  #tsuhenChartContainer,
+  #triangleContainer,
+  #actionKeywordsContainer {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+    clear: both !important;
+  }
+
+  /* ①〜⑤の区切り（最後は改ページしない） */
+  .meishiki-container { break-after: page !important; page-break-after: always !important; }
+  .daiun-container { break-after: page !important; page-break-after: always !important; }
+  #tsuhenChartContainer { break-after: page !important; page-break-after: always !important; }
+  #triangleContainer { break-after: page !important; page-break-after: always !important; }
+
+  /* ⑤ ActionKeywords 専用の横幅調整（他へ影響なし） */
+  #actionKeywordsContainer {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 8px !important;
+    overflow: hidden !important; /* はみ出し非表示 */
+  }
+  #actionKeywordsTable {
+    width: 100% !important;
+    max-width: 100% !important;
+    table-layout: fixed !important; /* 列幅を固定配分 */
+    border-collapse: collapse !important;
+    font-size: 7.5pt !important; /* 少し縮小 */
+    min-width: 0 !important; /* 余計な最小幅を無効化 */
+  }
+  #actionKeywordsTable th,
+  #actionKeywordsTable td {
+    padding: 3px 2px !important;
+    white-space: normal !important; /* 折り返し許可 */
+    word-break: break-word !important;
+    overflow-wrap: anywhere !important;
+    hyphens: auto !important; /* 英単語も分割 */
+    max-width: 55px !important; /* セル最大幅を制限 */
+    overflow: hidden !important; /* 内容のはみ出しを抑止 */
+    text-overflow: clip !important;
+    line-height: 1.15 !important;
+  }
+}
+
+/* フッタースタイル */
+.site-footer {
+  background-color: #FFCC66;
+  color: #ffffff;
+  text-align: center;
+  padding: 20px 0;
+  font-size: 14px;
+  margin-top: 40px;
+}
+
+/* destiny-master.html専用のスマホ対応スタイル */
+.date-inputs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.radio-label {
+  display: inline-block;
+  margin-right: 16px;
+  cursor: pointer;
+}
+
+.calculate-button {
+  width: 100%;
+  max-width: 300px;
+  margin: 16px auto 0;
+  display: block;
+}
+
+.table-container {
+  overflow-x: auto;
+  max-width: 100%;
+  margin: 16px 0;
+}
+
+/* スマホ用の追加調整 */
+@media (max-width: 600px) {
+  .date-inputs {
+    flex-direction: row !important;
+    align-items: center;
+    gap: 4px;
+    flex-wrap: nowrap;
+  }
+  
+  .date-inputs select {
+    width: auto !important;
+    max-width: 60px !important;
+    min-width: 50px !important;
+    font-size: 12px;
+    padding: 4px 2px;
+  }
+  
+  /* 年のプルダウンの幅を広げる */
+  .date-inputs select:first-child {
+    max-width: 70px !important;
+    min-width: 65px !important;
+  }
+  
+  .date-inputs select + span {
+    font-size: 12px;
+    margin: 0 2px;
+  }
+  
+  .radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .radio-label {
+    margin-right: 0;
+    margin-bottom: 8px;
+  }
+  
+  .calculate-button {
+    width: 100%;
+    max-width: none;
+    margin-top: 20px;
+  }
+  
+  .table-container {
+    margin: 12px 0;
+  }
+  
+  .koyomi-link-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 0 8px !important;
+  }
+  
+  .koyomi-link-button {
+    width: 100% !important;
+    max-width: none !important;
+    min-width: auto !important;
+    padding: 16px 20px !important;
+    font-size: 16px !important;
+    box-sizing: border-box !important;
+    word-wrap: break-word !important;
+    white-space: normal !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .date-inputs {
+    gap: 2px;
+  }
+  
+  .date-inputs select {
+    max-width: 50px !important;
+    min-width: 45px !important;
+    font-size: 11px;
+    padding: 3px 1px;
+  }
+  
+  /* 年のプルダウンの幅を広げる */
+  .date-inputs select:first-child {
+    max-width: 65px !important;
+    min-width: 60px !important;
+  }
+  
+  .date-inputs select + span {
+    font-size: 11px;
+    margin: 0 1px;
+  }
+  
+  .calculate-button {
+    padding: 12px 16px;
+    font-size: 16px;
+  }
+  
+  .koyomi-link-button {
+    padding: 14px 16px !important;
+    font-size: 14px !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .date-inputs {
+    gap: 1px;
+  }
+  
+  .date-inputs select {
+    max-width: 45px !important;
+    min-width: 40px !important;
+    font-size: 10px;
+    padding: 2px 1px;
+  }
+  
+  /* 年のプルダウンの幅を広げる */
+  .date-inputs select:first-child {
+    max-width: 60px !important;
+    min-width: 55px !important;
+  }
+  
+  .date-inputs select + span {
+    font-size: 10px;
+    margin: 0;
+  }
+}
+
+/* PC表示のレイアウト修正: 命式と大運を横並びで収める */
+@media (min-width: 1025px) {
+  .top-row > .meishiki-container,
+  .top-row > .daiun-container {
+    flex: 1 1 0 !important;
+    width: auto !important;
+    max-width: 100% !important;
+  }
+
+  /* 命式コンテナの固定幅をPCでは解除してカラム幅に追従 */
+  .meishiki-container {
+    width: auto !important;
+    max-width: none !important;
+  }
+
+  /* テーブルが不必要に横幅を要求しないようにする */
+  .meishiki-container table {
+    min-width: 0 !important;
+  }
+
+  #meishikiTable th,
+  #meishikiTable td {
+    min-width: auto !important;
+  }
+}
+
+

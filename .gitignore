@@ -1,0 +1,13 @@
+.DS_Store
+Thumbs.db
+node_modules/
+dist/
+build/
+.env
+.env.*
+*.log
+.cache/
+.tmp/
+coverage/
+assets/eval-*.png
+assets/current-reference-style-*.png
