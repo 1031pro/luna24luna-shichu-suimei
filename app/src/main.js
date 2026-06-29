@@ -4,6 +4,7 @@ import { calculateChart } from "./engine/chart.js";
 import { calculateAnnualLuck, calculateMajorLuck } from "./engine/luck.js";
 import { generateInterpretation } from "./interpretation/generate.js";
 import { printReport } from "./report/print.js";
+import { createVerificationSheetUrl } from "./report/verification-sheet.js";
 import { renderResult } from "./ui/render.js";
 
 const form = document.querySelector("#birth-form");
@@ -83,6 +84,10 @@ function calculateAndRender() {
     interpretation,
     profile: defaultProfile,
   });
+  const verificationLink = resultPanel.querySelector("[data-open-verification]");
+  if (verificationLink) {
+    verificationLink.href = createVerificationSheetUrl(currentReport);
+  }
   resultPanel.hidden = false;
   document.body.classList.add("result-mode");
   window.scrollTo({ top: 0, behavior: "instant" });

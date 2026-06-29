@@ -266,7 +266,10 @@ export function renderResult(target, { chart, majorLuck, annualLuck, profile, in
     ${profile.fortuneText?.enabled ? renderInterpretation(interpretation) : ""}
     ${
       profile.pdfReport?.enabled
-        ? `<button type="button" class="pdf-button" data-print-report>PDF鑑定書を作成</button>`
+        ? `<div class="report-actions">
+            <button type="button" class="pdf-button" data-print-report>PDF鑑定書を作成</button>
+            <a class="verification-button" data-open-verification href="#" target="_blank" rel="noopener">計算確認表</a>
+          </div>`
         : ""
     }
     <nav class="bottom-nav" aria-label="主要表示">

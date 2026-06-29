@@ -1,8 +1,9 @@
-const CACHE_NAME = "shichu-suimei-tool-v14";
+const CACHE_NAME = "shichu-suimei-tool-v15";
 
 const APP_SHELL = [
   "./",
   "./index.html",
+  "./verification.html",
   "./manifest.webmanifest",
   "./styles/app.css",
   "./icons/icon.svg",
@@ -23,6 +24,8 @@ const APP_SHELL = [
   "./src/engine/setsuiri.js",
   "./src/interpretation/generate.js",
   "./src/report/print.js",
+  "./src/report/verification-page.js",
+  "./src/report/verification-sheet.js",
   "./src/ui/render.js",
   "../data/setsuiri/setsuiri-1900-2200.js",
 ];

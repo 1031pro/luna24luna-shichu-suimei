@@ -1258,11 +1258,16 @@ tbody th,
   line-height: 1.8;
 }
 
+.report-actions {
+  display: block;
+  width: 100%;
+  margin-top: 12px;
+}
+
 .pdf-button {
   display: block;
   width: 100%;
   min-height: 46px;
-  margin-top: 12px;
   color: #fffefa;
   font: inherit;
   font-weight: 900;
@@ -1270,6 +1275,24 @@ tbody th,
   background: #061b36;
   border: 1px solid #bd8c22;
   border-radius: 10px;
+}
+
+.verification-button {
+  display: block;
+  width: 100%;
+  min-height: 36px;
+  margin-top: 8px;
+  padding: 8px 10px;
+  color: #5d5548;
+  font: inherit;
+  font-size: 0.86rem;
+  font-weight: 800;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  background: #fffefa;
+  border: 1px solid #d7c694;
+  border-radius: 8px;
 }
 
 @media (max-width: 900px) {
