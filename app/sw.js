@@ -1,4 +1,4 @@
-const CACHE_NAME = "shichu-suimei-tool-v15";
+const CACHE_NAME = "shichu-suimei-tool-v16";
 
 const APP_SHELL = [
   "./",
@@ -6,7 +6,7 @@ const APP_SHELL = [
   "./verification.html",
   "./manifest.webmanifest",
   "./styles/app.css",
-  "./icons/icon.svg",
+  "./icons/apple-touch-icon.png",
   "./icons/icon-192.png",
   "./icons/icon-512.png",
   "../assets/report/a4-landscape-ornament.png",
