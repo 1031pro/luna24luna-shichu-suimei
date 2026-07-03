@@ -201,6 +201,7 @@ body.result-mode .input-panel {
   justify-items: center;
   margin-bottom: 18px;
   padding-bottom: 12px;
+  animation: top-icon-enter 680ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 
 .brand-block::after {
@@ -249,6 +250,45 @@ h1 {
   border: 1px solid rgba(244, 197, 66, 0.28);
   border-radius: 14px;
   box-shadow: 0 18px 42px rgba(0, 0, 0, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  animation: top-form-enter 720ms cubic-bezier(0.2, 0.8, 0.2, 1) 180ms both;
+}
+
+@keyframes top-icon-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.96);
+    filter: blur(6px);
+  }
+
+  70% {
+    opacity: 1;
+    filter: blur(0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes top-form-enter {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-block,
+  .birth-form {
+    animation: none;
+  }
 }
 
 fieldset {
