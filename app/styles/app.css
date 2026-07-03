@@ -178,8 +178,9 @@ body.result-mode .input-panel {
   padding: 32px;
   color: #fff7d6;
   background:
-    radial-gradient(circle at 50% 88px, rgba(244, 197, 66, 0.38) 0 72px, rgba(244, 197, 66, 0.1) 122px, transparent 190px),
-    linear-gradient(180deg, #18181c 0%, #101114 54%, #08090b 100%);
+    radial-gradient(circle at 50% 88px, rgba(244, 197, 66, 0.38) 0 70px, rgba(244, 197, 66, 0.11) 132px, transparent 206px),
+    radial-gradient(circle at 78% 86%, rgba(255, 255, 255, 0.05), transparent 24%),
+    linear-gradient(180deg, #17171b 0%, #101114 54%, #090a0c 100%);
   border-right: 1px solid rgba(244, 197, 66, 0.24);
 }
 
@@ -211,15 +212,15 @@ body.result-mode .input-panel {
   z-index: 1;
   display: grid;
   justify-items: center;
-  margin-bottom: 24px;
-  padding-bottom: 16px;
+  margin-bottom: 18px;
+  padding-bottom: 12px;
 }
 
 .brand-block::after {
   display: block;
   width: min(148px, 42vw);
   height: 1px;
-  margin-top: 14px;
+  margin-top: 12px;
   background: linear-gradient(90deg, transparent, rgba(244, 197, 66, 0.72), transparent);
   content: "";
 }
@@ -253,7 +254,14 @@ h1 {
   position: relative;
   z-index: 1;
   display: grid;
-  gap: 20px;
+  gap: 18px;
+  padding: 18px;
+  background:
+    linear-gradient(180deg, rgba(30, 31, 36, 0.88), rgba(14, 15, 18, 0.9)),
+    rgba(18, 19, 22, 0.9);
+  border: 1px solid rgba(244, 197, 66, 0.28);
+  border-radius: 14px;
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 fieldset {
@@ -335,7 +343,7 @@ button:focus-visible {
   grid-template-columns: 1fr 1fr;
   gap: 4px;
   padding: 4px;
-  background: rgba(255, 253, 244, 0.1);
+  background: rgba(255, 253, 244, 0.08);
   border: 1px solid rgba(244, 197, 66, 0.26);
   border-radius: 8px;
 }
@@ -910,8 +918,8 @@ body.result-mode .result-summary {
 
 @media (max-width: 560px) {
   .brand-block {
-    margin-bottom: 14px;
-    padding-bottom: 10px;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
   }
 
   .brand-icon {
@@ -920,6 +928,8 @@ body.result-mode .result-summary {
 
   .birth-form {
     gap: 12px;
+    padding: 14px;
+    border-radius: 12px;
   }
 
   legend,
