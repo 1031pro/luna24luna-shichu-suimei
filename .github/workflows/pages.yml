@@ -1,4 +1,4 @@
-name: Deploy sample page
+name: Deploy client app
 
 on:
   push:

@@ -9,7 +9,7 @@ function showDeploymentError() {
   wrapper.innerHTML = `
     <section>
       <p>このサンプルページは指定URLからのみ利用できます。</p>
-      <a href="https://1031pro.github.io/shichu-suimei-demo/app/">サンプルページを開く</a>
+      <a href="https://1031pro.github.io/luna24luna-shichu-suimei/app/">アプリを開く</a>
     </section>
   `;
   document.body.append(wrapper);
