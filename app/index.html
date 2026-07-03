@@ -14,20 +14,7 @@
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="stylesheet" href="./styles/app.css" />
   </head>
-  <body class="is-locked">
-    <div id="demo-lock" class="demo-lock" role="dialog" aria-modal="true" aria-labelledby="demo-lock-title">
-      <form id="demo-lock-form" class="demo-lock-card">
-        <p class="eyebrow">サンプルページ</p>
-        <h1 id="demo-lock-title">四柱推命 命式ツール</h1>
-        <label>
-          <span>パスワード</span>
-          <input id="demo-password" name="password" type="password" autocomplete="current-password" required />
-        </label>
-        <p id="demo-lock-error" class="demo-lock-error" hidden>パスワードが違います</p>
-        <button type="submit">表示する</button>
-      </form>
-    </div>
-
+  <body>
     <main class="app-shell">
       <section class="input-panel" aria-label="命式入力">
         <div class="brand-block">
@@ -109,7 +96,6 @@
     </main>
 
     <script type="module" src="./src/deploy-guard.js"></script>
-    <script type="module" src="./src/auth.js"></script>
     <script type="module" src="./src/copy-guard.js"></script>
     <script type="module" src="./src/main.js"></script>
   </body>

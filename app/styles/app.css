@@ -47,60 +47,6 @@ body.is-locked {
   overflow: hidden;
 }
 
-.demo-lock {
-  position: fixed;
-  inset: 0;
-  z-index: 100;
-  display: grid;
-  place-items: center;
-  padding: 20px;
-  color: #1f1a0a;
-  background:
-    radial-gradient(circle at 18% 14%, rgba(255, 255, 255, 0.92) 0 7%, transparent 18%),
-    linear-gradient(145deg, #fff8dc 0%, #ffe89a 38%, #f0b400 70%, #d9a000 100%);
-}
-
-.demo-lock[hidden] {
-  display: none;
-}
-
-.demo-lock-card {
-  width: min(100%, 380px);
-  padding: 28px;
-  background: rgba(255, 253, 244, 0.82);
-  border: 1px solid rgba(226, 169, 0, 0.62);
-  box-shadow: 0 16px 42px rgba(197, 134, 0, 0.22);
-  border-radius: 10px;
-}
-
-.demo-lock-card h1 {
-  margin-bottom: 22px;
-}
-
-.demo-lock-card label {
-  display: block;
-}
-
-.demo-lock-card button {
-  width: 100%;
-  min-height: 44px;
-  margin-top: 16px;
-  color: #1f1a0a;
-  font: inherit;
-  font-weight: 900;
-  cursor: pointer;
-  background: linear-gradient(180deg, #fff7c9, #f0b400 54%, #d9a000);
-  border: 1px solid #d9a000;
-  border-radius: 8px;
-}
-
-.demo-lock-error {
-  margin: 8px 0 0;
-  color: #ffd6d6;
-  font-size: 13px;
-  font-weight: 800;
-}
-
 body.is-locked .app-shell {
   visibility: hidden;
 }
