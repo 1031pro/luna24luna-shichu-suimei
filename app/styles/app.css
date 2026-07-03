@@ -1,17 +1,17 @@
 :root {
   color-scheme: light;
-  --ink: #4a3500;
-  --muted: #7f650c;
-  --deep-green: #a97700;
+  --ink: #1f1a0a;
+  --muted: #51420d;
+  --deep-green: #9f7600;
   --green: #d7a20d;
   --green-2: #f0c642;
-  --gold: #f4c542;
+  --gold: #f0b400;
   --gold-soft: #fff4bc;
   --paper: #fff8dc;
   --paper-2: #ffe89a;
   --surface: #fffdf4;
   --line: #f1d575;
-  --line-strong: #e2a900;
+  --line-strong: #d9a000;
   --wood: #7b5429;
   --fire: #b84232;
   --earth: #8a6432;
@@ -54,10 +54,10 @@ body.is-locked {
   display: grid;
   place-items: center;
   padding: 20px;
-  color: #4a3500;
+  color: #1f1a0a;
   background:
     radial-gradient(circle at 18% 14%, rgba(255, 255, 255, 0.92) 0 7%, transparent 18%),
-    linear-gradient(145deg, #fff8dc 0%, #ffe89a 38%, #f4c542 70%, #d79a00 100%);
+    linear-gradient(145deg, #fff8dc 0%, #ffe89a 38%, #f0b400 70%, #d9a000 100%);
 }
 
 .demo-lock[hidden] {
@@ -85,12 +85,12 @@ body.is-locked {
   width: 100%;
   min-height: 44px;
   margin-top: 16px;
-  color: #4a3500;
+  color: #1f1a0a;
   font: inherit;
   font-weight: 900;
   cursor: pointer;
-  background: linear-gradient(180deg, #fff7c9, #f4c542 54%, #d79a00);
-  border: 1px solid #e2a900;
+  background: linear-gradient(180deg, #fff7c9, #f0b400 54%, #d9a000);
+  border: 1px solid #d9a000;
   border-radius: 8px;
 }
 
@@ -109,8 +109,8 @@ body.is-locked .app-shell {
   display: grid;
   min-height: 100vh;
   padding: 20px;
-  color: #4a3500;
-  background: linear-gradient(145deg, #fff8dc, #ffe89a 45%, #f4c542);
+  color: #1f1a0a;
+  background: linear-gradient(145deg, #fff8dc, #ffe89a 45%, #f0b400);
   place-items: center;
 }
 
@@ -126,7 +126,7 @@ body.is-locked .app-shell {
 .deploy-guard a {
   display: inline-block;
   margin-top: 14px;
-  color: #8f6500;
+  color: #4d3900;
   font-weight: 900;
 }
 
@@ -153,7 +153,7 @@ body:not(.result-mode) .app-shell {
   display: grid;
   grid-template-columns: minmax(320px, 430px);
   justify-content: center;
-  background: linear-gradient(145deg, #fff8dc 0%, #ffe89a 52%, #f4c542 100%);
+  background: linear-gradient(145deg, #fff8dc 0%, #ffe89a 52%, #f0b400 100%);
 }
 
 body:not(.result-mode) .input-panel {
@@ -174,11 +174,11 @@ body.result-mode .input-panel {
   position: relative;
   overflow: hidden;
   padding: 32px;
-  color: #4a3500;
+  color: #1f1a0a;
   background:
     radial-gradient(circle at 18% 12%, rgba(255, 255, 255, 0.92) 0 5%, transparent 16%),
     radial-gradient(circle at 88% 82%, rgba(255, 255, 255, 0.7) 0 4%, transparent 14%),
-    linear-gradient(145deg, #fff8dc 0%, #ffe89a 42%, #f4c542 76%, #d79a00 100%);
+    linear-gradient(145deg, #fff8dc 0%, #ffe89a 42%, #f0b400 76%, #d9a000 100%);
   border-right: 1px solid rgba(255, 224, 134, 0.5);
   color: #fffaf0;
 }
@@ -222,9 +222,19 @@ body.result-mode .input-panel {
   content: "";
 }
 
+.brand-block h1 {
+  color: #1f1a0a;
+  font-weight: 900;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.62);
+}
+
+.input-panel .eyebrow {
+  color: #4d3900;
+}
+
 .eyebrow {
   margin: 0 0 8px;
-  color: #8f6500;
+  color: #4d3900;
   font-size: 13px;
   font-weight: 700;
 }
@@ -254,7 +264,7 @@ legend,
 label > span {
   display: block;
   margin-bottom: 8px;
-  color: rgba(74, 53, 0, 0.86);
+  color: rgba(31, 26, 10, 0.9);
   font-size: 13px;
   font-weight: 700;
 }
@@ -297,7 +307,7 @@ button:focus-visible {
 .report-name-field small {
   display: block;
   margin-top: 6px;
-  color: rgba(74, 53, 0, 0.62);
+  color: rgba(31, 26, 10, 0.68);
   font-size: 12px;
   font-weight: 700;
 }
@@ -311,7 +321,7 @@ button:focus-visible {
 
 .check-row span {
   margin: 0;
-  color: #4a3500;
+  color: #1f1a0a;
   font-size: 14px;
   font-weight: 700;
 }
@@ -339,7 +349,7 @@ button:focus-visible {
   display: block;
   margin: 0;
   padding: 10px;
-  color: rgba(74, 53, 0, 0.68);
+  color: rgba(31, 26, 10, 0.72);
   font-size: 14px;
   font-weight: 800;
   text-align: center;
@@ -353,10 +363,10 @@ button:focus-visible {
 
 button[type="submit"] {
   min-height: 46px;
-  color: #4a3500;
+  color: #1f1a0a;
   font-weight: 800;
   cursor: pointer;
-  background: linear-gradient(180deg, #fff7c9 0%, #f4c542 52%, #d79a00 100%);
+  background: linear-gradient(180deg, #fff7c9 0%, #f0b400 52%, #d9a000 100%);
   border: 1px solid rgba(139, 93, 0, 0.24);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.86), 0 8px 20px rgba(197, 134, 0, 0.22);
   border-radius: 6px;
@@ -966,7 +976,7 @@ body {
   gap: 10px;
   align-items: center;
   padding: 14px 16px;
-  color: #4a3500;
+  color: #1f1a0a;
   background: linear-gradient(180deg, #fffdf4, #fff4bc);
   border: 1px solid #f1d575;
   border-bottom: 0;
@@ -975,6 +985,7 @@ body {
 
 .app-preview-header strong {
   font-size: 1.18rem;
+  font-weight: 900;
   text-align: center;
 }
 
@@ -992,7 +1003,7 @@ body {
 .date-edit-button {
   min-height: 32px;
   padding: 6px 10px;
-  color: #4a3500;
+  color: #1f1a0a;
   font: inherit;
   font-size: 0.78rem;
   font-weight: 800;
@@ -1014,9 +1025,9 @@ body {
 
 .app-tabs button {
   padding: 11px 8px;
-  color: #4a3500;
+  color: #1f1a0a;
   font: inherit;
-  font-weight: 800;
+  font-weight: 900;
   text-align: center;
   cursor: pointer;
   background: transparent;
@@ -1029,8 +1040,9 @@ body {
 }
 
 .app-tabs .is-active {
-  color: #4a3500;
-  background: linear-gradient(180deg, #fff7c9, #f4c542);
+  color: #1f1a0a;
+  background: linear-gradient(180deg, #fff7c9, #f0b400);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.75);
 }
 
 .result-summary {
@@ -1039,7 +1051,7 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 14px 16px;
-  color: #4a3500;
+  color: #1f1a0a;
   background: linear-gradient(180deg, #fffdf4, #fff4bc);
   border: 1px solid #f1d575;
   border-top: 0;
@@ -1052,16 +1064,16 @@ body {
 }
 
 .result-summary h1 {
-  color: #4a3500;
+  color: #1f1a0a;
   font-size: 1.12rem;
 }
 
 .result-summary p {
-  color: #7f650c;
+  color: #51420d;
 }
 
 .profile-badge {
-  color: #4a3500;
+  color: #1f1a0a;
   background: #fff8dc;
   border-color: #f1d575;
 }
@@ -1089,7 +1101,7 @@ body {
 }
 
 .section-title h2 {
-  color: #4a3500;
+  color: #1f1a0a;
   font-size: 1.05rem;
 }
 
@@ -1112,32 +1124,34 @@ td {
 thead th,
 tbody th,
 .row-head {
-  color: #4a3500;
-  background: linear-gradient(180deg, #fff7c9, #f4c542 55%, #e2a900);
+  color: #1f1a0a;
+  font-weight: 950;
+  background: linear-gradient(180deg, #fff7c9, #f0b400 55%, #d9a000);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.72);
 }
 
 .meishiki-table .pillar-head {
-  color: #4a3500;
+  color: #1f1a0a;
 }
 
 .meishiki-table .pillar-year {
-  background: linear-gradient(180deg, #fff0a3, #e2a900);
+  background: linear-gradient(180deg, #fff0a3, #d9a000);
 }
 
 .meishiki-table .pillar-month {
-  background: linear-gradient(180deg, #ffe37a, #d79a00);
+  background: linear-gradient(180deg, #ffe37a, #d9a000);
 }
 
 .meishiki-table .pillar-day {
-  background: linear-gradient(180deg, #fff7c9, #f4c542);
+  background: linear-gradient(180deg, #fff7c9, #f0b400);
 }
 
 .meishiki-table .pillar-time {
-  background: linear-gradient(180deg, #ffd65d, #c98a00);
+  background: linear-gradient(180deg, #ffd65d, #d9a000);
 }
 
 .meishiki-table td {
-  color: #4a3500;
+  color: #1f1a0a;
   background: #fffdf4;
 }
 
@@ -1199,7 +1213,7 @@ tbody th,
 
 .balance-row span {
   order: 3;
-  color: #4a3500;
+  color: #1f1a0a;
   font-weight: 800;
   text-align: right;
 }
@@ -1252,7 +1266,7 @@ tbody th,
 
 .interpretation-list h3 {
   margin: 0 0 6px;
-  color: #4a3500;
+  color: #1f1a0a;
   font-size: 0.98rem;
 }
 
@@ -1273,12 +1287,13 @@ tbody th,
   display: block;
   width: 100%;
   min-height: 46px;
-  color: #4a3500;
+  color: #1f1a0a;
   font: inherit;
   font-weight: 900;
   cursor: pointer;
-  background: linear-gradient(180deg, #fff7c9 0%, #f4c542 52%, #d79a00 100%);
-  border: 1px solid #e2a900;
+  background: linear-gradient(180deg, #fff7c9 0%, #f0b400 52%, #d9a000 100%);
+  border: 1px solid #d9a000;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.72);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.86), 0 8px 20px rgba(197, 134, 0, 0.18);
   border-radius: 10px;
 }
@@ -1289,7 +1304,7 @@ tbody th,
   min-height: 36px;
   margin-top: 8px;
   padding: 8px 10px;
-  color: #7f650c;
+  color: #51420d;
   font: inherit;
   font-size: 0.86rem;
   font-weight: 800;
@@ -1370,15 +1385,15 @@ tbody th,
     box-shadow: 0 8px 24px rgba(197, 134, 0, 0.18);
   }
 
-  .bottom-nav button {
+.bottom-nav button {
     display: grid;
     gap: 5px;
     min-height: 54px;
     padding: 7px 4px;
-    color: #4a3500;
+    color: #1f1a0a;
     font: inherit;
     font-size: 0.8rem;
-    font-weight: 800;
+    font-weight: 900;
     cursor: pointer;
     background: #fffdf4;
     border: 1px solid #f1d575;
@@ -1388,8 +1403,9 @@ tbody th,
 
   .bottom-nav .is-active,
   .bottom-nav button:focus-visible {
-    color: #4a3500;
-    background: linear-gradient(180deg, #fff7c9, #f4c542);
+    color: #1f1a0a;
+    background: linear-gradient(180deg, #fff7c9, #f0b400);
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.72);
   }
 
   .bottom-nav svg {
