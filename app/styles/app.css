@@ -154,13 +154,54 @@ body:not(.result-mode) .app-shell {
   grid-template-columns: minmax(320px, 430px);
   justify-content: center;
   background:
-    radial-gradient(circle at 50% 0%, rgba(240, 180, 0, 0.2), transparent 34%),
-    #0f0f12;
+    radial-gradient(circle at 50% 0%, rgba(240, 180, 0, 0.16), transparent 34%),
+    linear-gradient(180deg, #f8f0df 0%, #eee2c8 100%);
 }
 
 body:not(.result-mode) .input-panel {
   min-height: 100vh;
   border-right: 0;
+}
+
+@media (min-width: 901px) {
+  body:not(.result-mode) .app-shell {
+    grid-template-columns: minmax(860px, 1040px);
+    align-items: center;
+    justify-content: center;
+    padding: 36px;
+  }
+
+  body:not(.result-mode) .input-panel {
+    display: grid;
+    grid-template-columns: minmax(320px, 1fr) minmax(380px, 430px);
+    gap: 48px;
+    align-items: center;
+    min-height: min(760px, calc(100vh - 72px));
+    padding: 48px;
+    border: 1px solid rgba(244, 197, 66, 0.28);
+    border-radius: 24px;
+    box-shadow: 0 30px 80px rgba(32, 27, 12, 0.36);
+  }
+
+  body:not(.result-mode) .brand-block {
+    align-self: center;
+    margin: 0;
+    padding: 0;
+  }
+
+  body:not(.result-mode) .brand-block::after {
+    width: 240px;
+    margin-top: 28px;
+  }
+
+  body:not(.result-mode) .brand-icon {
+    width: min(280px, 28vw);
+    filter: drop-shadow(0 22px 52px rgba(244, 197, 66, 0.42));
+  }
+
+  body:not(.result-mode) .birth-form {
+    width: 100%;
+  }
 }
 
 body.result-mode .app-shell {
@@ -814,6 +855,20 @@ td {
 }
 
 @media (max-width: 900px) {
+  body:not(.result-mode) .app-shell {
+    grid-template-columns: 1fr;
+    padding: 0;
+  }
+
+  body:not(.result-mode) .input-panel {
+    display: block;
+    width: 100%;
+    min-height: 100vh;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
   .app-shell {
     grid-template-columns: 1fr;
   }
