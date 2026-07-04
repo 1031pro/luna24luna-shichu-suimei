@@ -97,6 +97,67 @@ function annualLuckTables(rows) {
     .join("");
 }
 
+function periodLuckRows(rows, firstCell) {
+  return rows
+    .map(
+      (row) => `
+        <tr class="${row.active ? "active" : ""}">
+          <td>${escapeHtml(firstCell(row))}</td>
+          <td>${escapeHtml(row.pillar.label)}</td>
+          <td>${escapeHtml(row.pillar.tenGod)}</td>
+          <td class="reading-cell">${escapeHtml(row.reading)}</td>
+        </tr>
+      `,
+    )
+    .join("");
+}
+
+function monthlyLuckSheet(rows, title) {
+  const first = rows[0];
+  const last = rows.at(-1);
+  return `
+    <section class="sheet period-luck-sheet monthly-luck-sheet">
+      <div class="content">
+        <div class="report-header">
+          <strong>月運一覧</strong>
+          <span>${first.year}年${first.month}月-${last.year}年${last.month}月</span>
+        </div>
+        <h2>月運一覧</h2>
+        <table class="period-table">
+          <thead><tr><th>年月</th><th>干支</th><th>通変星</th><th>鑑定文</th></tr></thead>
+          <tbody>${periodLuckRows(rows, (row) => `${row.year}年${row.month}月`)}</tbody>
+        </table>
+      </div>
+      <div class="footer">${escapeHtml(title)}　月運</div>
+    </section>
+  `;
+}
+
+function dailyLuckSheets(rows, title) {
+  const first = rows[0];
+  const chunks = chunkRows(rows, 16);
+  return chunks
+    .map(
+      (chunk, index) => `
+        <section class="sheet period-luck-sheet daily-luck-sheet">
+          <div class="content">
+            <div class="report-header">
+              <strong>日運一覧</strong>
+              <span>${first.year}年${first.month}月 ${index + 1}/${chunks.length}</span>
+            </div>
+            <h2>日運一覧 ${first.year}年${first.month}月</h2>
+            <table class="period-table">
+              <thead><tr><th>日</th><th>干支</th><th>通変星</th><th>鑑定文</th></tr></thead>
+              <tbody>${periodLuckRows(chunk, (row) => `${row.day}日（${row.weekday}）`)}</tbody>
+            </table>
+          </div>
+          <div class="footer">${escapeHtml(title)}　日運 ${index + 1}/${chunks.length}</div>
+        </section>
+      `,
+    )
+    .join("");
+}
+
 function interpretationBlocks(items) {
   return items
     .map(
@@ -127,7 +188,7 @@ function reportTitle(profile) {
   return profile?.pdfReport?.title || "四柱推命鑑定書";
 }
 
-export function printReport({ chart, majorLuck, annualLuck, interpretation, profile, customerName }) {
+export function printReport({ chart, majorLuck, annualLuck, monthlyLuck, dailyLuck, interpretation, profile, customerName }) {
   const reportWindow = window.open("", "_blank");
   if (!reportWindow) return;
 
@@ -137,6 +198,8 @@ export function printReport({ chart, majorLuck, annualLuck, interpretation, prof
   const currentAnnualLuck = annualLuck.find((row) => row.active) || annualLuck[0];
   const [firstText, secondText] = splitInterpretation(interpretation);
   const title = reportTitle(profile);
+  const monthlyLuckSheetHtml = monthlyLuckSheet(monthlyLuck, title);
+  const dailyLuckSheetsHtml = dailyLuckSheets(dailyLuck, title);
 
   reportWindow.document.write(`
     <!doctype html>
@@ -452,6 +515,45 @@ export function printReport({ chart, majorLuck, annualLuck, interpretation, prof
             line-height: 1.18;
           }
 
+          .period-luck-sheet .content {
+            height: 190mm;
+          }
+
+          .period-table {
+            table-layout: fixed;
+          }
+
+          .period-table th:nth-child(1),
+          .period-table td:nth-child(1) {
+            width: 24mm;
+          }
+
+          .period-table th:nth-child(2),
+          .period-table td:nth-child(2) {
+            width: 18mm;
+          }
+
+          .period-table th:nth-child(3),
+          .period-table td:nth-child(3) {
+            width: 22mm;
+          }
+
+          .period-table .reading-cell {
+            text-align: left;
+            font-size: 7.1pt;
+            line-height: 1.45;
+          }
+
+          .monthly-luck-sheet .period-table th,
+          .monthly-luck-sheet .period-table td {
+            padding: 1.65mm 1.3mm;
+          }
+
+          .daily-luck-sheet .period-table th,
+          .daily-luck-sheet .period-table td {
+            padding: 1.18mm 1mm;
+          }
+
           .balance-list {
             display: grid;
             gap: 1.8mm;
@@ -646,6 +748,9 @@ export function printReport({ chart, majorLuck, annualLuck, interpretation, prof
             </div>
             <div class="footer">${escapeHtml(title)}　第三頁</div>
           </section>
+
+          ${monthlyLuckSheetHtml}
+          ${dailyLuckSheetsHtml}
         </main>
         <script>
           window.addEventListener("load", () => {

@@ -1,7 +1,7 @@
 import { setsuiri } from "../../data/setsuiri/setsuiri-1900-2200.js";
 import { defaultProfile } from "./data/profile.js";
 import { calculateChart } from "./engine/chart.js";
-import { calculateAnnualLuck, calculateMajorLuck } from "./engine/luck.js";
+import { calculateAnnualLuck, calculateDailyLuck, calculateMajorLuck, calculateMonthlyLuck } from "./engine/luck.js";
 import { generateInterpretation } from "./interpretation/generate.js";
 import { printReport } from "./report/print.js";
 import { createVerificationSheetUrl } from "./report/verification-sheet.js";
@@ -17,6 +17,10 @@ const minuteSelect = document.querySelector("#birth-minute");
 const unknownTime = document.querySelector("#unknown-time");
 const currentYearInput = document.querySelector("#current-year");
 const customerNameInput = document.querySelector("#customer-name");
+const monthlyLuckYearSelect = document.querySelector("#monthly-luck-year");
+const monthlyLuckMonthSelect = document.querySelector("#monthly-luck-month");
+const dailyLuckYearSelect = document.querySelector("#daily-luck-year");
+const dailyLuckMonthSelect = document.querySelector("#daily-luck-month");
 
 let currentReport = null;
 
@@ -58,6 +62,10 @@ function readInput() {
     unknownTime: data.get("unknownTime") === "on",
     sex: data.get("sex") || "male",
     currentYear: Number(data.get("currentYear")),
+    monthlyLuckYear: Number(data.get("monthlyLuckYear")),
+    monthlyLuckMonth: Number(data.get("monthlyLuckMonth")),
+    dailyLuckYear: Number(data.get("dailyLuckYear")),
+    dailyLuckMonth: Number(data.get("dailyLuckMonth")),
   };
 }
 
@@ -66,6 +74,8 @@ function calculateAndRender() {
   const chart = calculateChart(input, setsuiri);
   const majorLuck = calculateMajorLuck(chart, setsuiri, input.currentYear);
   const annualLuck = calculateAnnualLuck(chart, input.currentYear, defaultProfile.annualLuck?.maxDisplayAge || 100);
+  const monthlyLuck = calculateMonthlyLuck(chart, input.monthlyLuckYear, input.monthlyLuckMonth, 12);
+  const dailyLuck = calculateDailyLuck(chart, input.dailyLuckYear, input.dailyLuckMonth);
   const interpretation = defaultProfile.fortuneText.enabled
     ? generateInterpretation({ chart, majorLuck, annualLuck })
     : [];
@@ -73,6 +83,8 @@ function calculateAndRender() {
     chart,
     majorLuck,
     annualLuck,
+    monthlyLuck,
+    dailyLuck,
     interpretation,
     profile: defaultProfile,
     customerName: input.customerName,
@@ -81,6 +93,8 @@ function calculateAndRender() {
     chart,
     majorLuck,
     annualLuck,
+    monthlyLuck,
+    dailyLuck,
     interpretation,
     profile: defaultProfile,
   });
@@ -99,6 +113,10 @@ function initForm() {
   fillSelect(monthSelect, Array.from({ length: 12 }, (_, i) => i + 1), 1);
   fillSelect(hourSelect, Array.from({ length: 24 }, (_, i) => i), 12);
   fillSelect(minuteSelect, Array.from({ length: 60 }, (_, i) => i), 0);
+  fillSelect(monthlyLuckYearSelect, Array.from({ length: 301 }, (_, i) => 1900 + i), today.getFullYear());
+  fillSelect(monthlyLuckMonthSelect, Array.from({ length: 12 }, (_, i) => i + 1), today.getMonth() + 1);
+  fillSelect(dailyLuckYearSelect, Array.from({ length: 301 }, (_, i) => 1900 + i), today.getFullYear());
+  fillSelect(dailyLuckMonthSelect, Array.from({ length: 12 }, (_, i) => i + 1), today.getMonth() + 1);
   currentYearInput.value = today.getFullYear();
   customerNameInput.value = "";
   updateDays();

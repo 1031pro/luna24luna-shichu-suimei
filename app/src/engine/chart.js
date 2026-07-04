@@ -56,7 +56,7 @@ function getMonthPillar(setsuiri, date, yearStemIndex) {
   };
 }
 
-function getDayPillar(date) {
+export function getDayPillar(date) {
   const base = new Date(1926, 0, 1, 0, 0, 0, 0);
   const localDate = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0, 0);
   const elapsedDays = Math.floor((localDate - base) / 86400000);

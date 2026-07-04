@@ -83,6 +83,28 @@
             <input id="current-year" name="currentYear" type="number" min="1900" max="2200" />
           </label>
 
+          <fieldset>
+            <legend>月運・日運</legend>
+            <div class="date-grid luck-date-grid">
+              <label>
+                <span>月運 開始年</span>
+                <select id="monthly-luck-year" name="monthlyLuckYear"></select>
+              </label>
+              <label>
+                <span>月運 開始月</span>
+                <select id="monthly-luck-month" name="monthlyLuckMonth"></select>
+              </label>
+              <label>
+                <span>日運 年</span>
+                <select id="daily-luck-year" name="dailyLuckYear"></select>
+              </label>
+              <label>
+                <span>日運 月</span>
+                <select id="daily-luck-month" name="dailyLuckMonth"></select>
+              </label>
+            </div>
+          </fieldset>
+
           <button type="submit">命式を表示</button>
         </form>
       </section>

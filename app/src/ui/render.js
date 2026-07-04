@@ -233,7 +233,69 @@ function renderAnnualLuck(rows) {
   `;
 }
 
-export function renderResult(target, { chart, majorLuck, annualLuck, profile, interpretation = [] }) {
+function renderPeriodLuck({ id, title, subtitle, rows, firstColumnLabel, firstColumn }) {
+  return `
+    <section id="${escapeHtml(id)}" class="result-block luck-block period-luck-block">
+      <div class="section-title">
+        <h2>${escapeHtml(title)}</h2>
+        <span>${escapeHtml(subtitle)}</span>
+      </div>
+      <div class="table-wrap compact">
+        <table>
+          <thead>
+            <tr>
+              <th>${escapeHtml(firstColumnLabel)}</th>
+              <th>干支</th>
+              <th>通変星</th>
+              <th>鑑定文</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${rows
+              .map(
+                (row) => `
+                  <tr class="${row.active ? "is-active" : ""}">
+                    <td data-label="${escapeHtml(firstColumnLabel)}">${escapeHtml(firstColumn(row))}</td>
+                    <td data-label="干支">${escapeHtml(row.pillar.label)}</td>
+                    <td data-label="通変星">${escapeHtml(row.pillar.tenGod)}</td>
+                    <td data-label="鑑定文" class="reading-cell">${escapeHtml(row.reading)}</td>
+                  </tr>
+                `,
+              )
+              .join("")}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  `;
+}
+
+function renderMonthlyLuck(rows) {
+  const first = rows[0];
+  const last = rows.at(-1);
+  return renderPeriodLuck({
+    id: "monthly-luck-section",
+    title: "月運",
+    subtitle: `${first.year}年${first.month}月-${last.year}年${last.month}月`,
+    rows,
+    firstColumnLabel: "年月",
+    firstColumn: (row) => `${row.year}年${row.month}月`,
+  });
+}
+
+function renderDailyLuck(rows) {
+  const first = rows[0];
+  return renderPeriodLuck({
+    id: "daily-luck-section",
+    title: "日運",
+    subtitle: `${first.year}年${first.month}月`,
+    rows,
+    firstColumnLabel: "日",
+    firstColumn: (row) => `${row.day}日（${row.weekday}）`,
+  });
+}
+
+export function renderResult(target, { chart, majorLuck, annualLuck, monthlyLuck, dailyLuck, profile, interpretation = [] }) {
   const birthTimeLabel = chart.input.unknownTime
     ? "出生時刻なし"
     : `${String(chart.input.hour).padStart(2, "0")}:${String(chart.input.minute).padStart(2, "0")}`;
@@ -248,6 +310,8 @@ export function renderResult(target, { chart, majorLuck, annualLuck, profile, in
       <button type="button" class="is-active" data-scroll-target="chart-section">命式</button>
       <button type="button" data-scroll-target="major-luck-section">大運</button>
       <button type="button" data-scroll-target="annual-luck-section">年運</button>
+      <button type="button" data-scroll-target="monthly-luck-section">月運</button>
+      <button type="button" data-scroll-target="daily-luck-section">日運</button>
       <button type="button" data-scroll-target="balance-section">五行</button>
     </nav>
     <div class="result-summary">
@@ -261,6 +325,8 @@ export function renderResult(target, { chart, majorLuck, annualLuck, profile, in
     <div class="luck-grid">
       ${renderMajorLuck(majorLuck)}
       ${renderAnnualLuck(annualLuck)}
+      ${renderMonthlyLuck(monthlyLuck)}
+      ${renderDailyLuck(dailyLuck)}
     </div>
     <div id="balance-section">${renderElementBalance(chart)}</div>
     ${profile.fortuneText?.enabled ? renderInterpretation(interpretation) : ""}
@@ -284,6 +350,14 @@ export function renderResult(target, { chart, majorLuck, annualLuck, profile, in
       <button type="button" data-scroll-target="annual-luck-section">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4v3M17 4v3M5 9h14M6 6h12v14H6z"/></svg>
         年運
+      </button>
+      <button type="button" data-scroll-target="monthly-luck-section">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h14v14H5zM8 9h8M8 13h5"/></svg>
+        月運
+      </button>
+      <button type="button" data-scroll-target="daily-luck-section">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4v4M17 4v4M5 10h14M8 15h3M6 6h12v14H6z"/></svg>
+        日運
       </button>
       <button type="button" data-scroll-target="balance-section">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M4 12h16M6 6l12 12M18 6 6 18"/></svg>

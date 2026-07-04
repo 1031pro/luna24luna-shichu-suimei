@@ -19,6 +19,8 @@ export const defaultProfile = {
     showVoidBranches: true,
     showMajorLuck: true,
     showAnnualLuck: true,
+    showMonthlyLuck: true,
+    showDailyLuck: true,
   },
   annualLuck: {
     maxDisplayAge: 100,
