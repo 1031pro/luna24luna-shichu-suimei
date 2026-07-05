@@ -97,11 +97,11 @@ function annualLuckTables(rows) {
     .join("");
 }
 
-function periodLuckRows(rows, firstCell) {
+function periodLuckRows(rows, firstCell, { highlightActive = true } = {}) {
   return rows
     .map(
       (row) => `
-        <tr class="${row.active ? "active" : ""}">
+        <tr class="${highlightActive && row.active ? "active" : ""}">
           <td>${escapeHtml(firstCell(row))}</td>
           <td>${escapeHtml(row.pillar.label)}</td>
           <td>${escapeHtml(row.pillar.tenGod)}</td>
@@ -148,7 +148,7 @@ function dailyLuckSheets(rows, title) {
             <h2>日運一覧 ${first.year}年${first.month}月</h2>
             <table class="period-table">
               <thead><tr><th>日</th><th>干支</th><th>通変星</th><th>鑑定文</th></tr></thead>
-              <tbody>${periodLuckRows(chunk, (row) => `${row.day}日（${row.weekday}）`)}</tbody>
+              <tbody>${periodLuckRows(chunk, (row) => `${row.day}日（${row.weekday}）`, { highlightActive: false })}</tbody>
             </table>
           </div>
           <div class="footer">${escapeHtml(title)}　日運 ${index + 1}/${chunks.length}</div>
