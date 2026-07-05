@@ -135,7 +135,7 @@ function monthlyLuckSheet(rows, title) {
 
 function dailyLuckSheets(rows, title) {
   const first = rows[0];
-  const chunks = chunkRows(rows, 10);
+  const chunks = [rows.slice(0, 20), rows.slice(20)].filter((chunk) => chunk.length > 0);
   return chunks
     .map(
       (chunk, index) => `
@@ -551,7 +551,14 @@ export function printReport({ chart, majorLuck, annualLuck, monthlyLuck, dailyLu
 
           .daily-luck-sheet .period-table th,
           .daily-luck-sheet .period-table td {
-            padding: 1.18mm 1mm;
+            padding: 0.72mm 0.9mm;
+            font-size: 6.15pt;
+            line-height: 1.18;
+          }
+
+          .daily-luck-sheet .period-table .reading-cell {
+            font-size: 6.05pt;
+            line-height: 1.22;
           }
 
           .balance-list {
