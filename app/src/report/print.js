@@ -125,7 +125,7 @@ function monthlyLuckSheet(rows, title) {
         <h2>月運一覧</h2>
         <table class="period-table">
           <thead><tr><th>年月</th><th>干支</th><th>通変星</th><th>鑑定文</th></tr></thead>
-          <tbody>${periodLuckRows(rows, (row) => `${row.year}年${row.month}月`)}</tbody>
+          <tbody>${periodLuckRows(rows, (row) => `${row.year}年${row.month}月`, { highlightActive: false })}</tbody>
         </table>
       </div>
       <div class="footer">${escapeHtml(title)}　月運</div>
