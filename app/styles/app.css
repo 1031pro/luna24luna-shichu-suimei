@@ -31,16 +31,14 @@ body {
   min-height: 100vh;
   margin: 0;
   background: #fff8dc;
-  -webkit-user-select: none;
-  user-select: none;
 }
 
 input,
 textarea,
 select,
 button {
-  -webkit-user-select: auto;
-  user-select: auto;
+  -webkit-user-select: text;
+  user-select: text;
 }
 
 body.is-locked {
@@ -1249,13 +1247,32 @@ tbody th,
 }
 
 .period-luck-block table {
-  min-width: 780px;
+  min-width: 0;
+  table-layout: fixed;
+}
+
+.period-luck-block {
+  grid-column: 1 / -1;
+}
+
+.period-luck-block th:nth-child(1),
+.period-luck-block td:nth-child(1) {
+  width: 18%;
+}
+
+.period-luck-block th:nth-child(2),
+.period-luck-block td:nth-child(2),
+.period-luck-block th:nth-child(3),
+.period-luck-block td:nth-child(3) {
+  width: 13%;
 }
 
 .period-luck-block .reading-cell {
-  min-width: 320px;
   text-align: left;
   line-height: 1.65;
+  white-space: normal;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
 }
 
 .luck-block th,

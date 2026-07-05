@@ -135,7 +135,7 @@ function monthlyLuckSheet(rows, title) {
 
 function dailyLuckSheets(rows, title) {
   const first = rows[0];
-  const chunks = chunkRows(rows, 16);
+  const chunks = chunkRows(rows, 10);
   return chunks
     .map(
       (chunk, index) => `
