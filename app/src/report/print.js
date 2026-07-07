@@ -480,6 +480,13 @@ export function printReport({ chart, majorLuck, annualLuck, monthlyLuck, dailyLu
             font-size: 6.5pt;
           }
 
+          .major-table th,
+          .major-table td {
+            padding: 1.65mm 1.25mm;
+            font-size: 8.1pt;
+            line-height: 1.35;
+          }
+
           .annual-sheet .content {
             height: 190mm;
           }
@@ -510,9 +517,9 @@ export function printReport({ chart, majorLuck, annualLuck, monthlyLuck, dailyLu
 
           .annual-table th,
           .annual-table td {
-            padding: 0.8mm 0.55mm;
-            font-size: 5.7pt;
-            line-height: 1.18;
+            padding: 1.35mm 0.65mm;
+            font-size: 6.9pt;
+            line-height: 1.32;
           }
 
           .period-luck-sheet .content {
@@ -551,14 +558,14 @@ export function printReport({ chart, majorLuck, annualLuck, monthlyLuck, dailyLu
 
           .daily-luck-sheet .period-table th,
           .daily-luck-sheet .period-table td {
-            padding: 1.05mm 1mm;
-            font-size: 6.6pt;
-            line-height: 1.34;
+            padding: 1.35mm 1.05mm;
+            font-size: 7.35pt;
+            line-height: 1.42;
           }
 
           .daily-luck-sheet .period-table .reading-cell {
-            font-size: 6.45pt;
-            line-height: 1.38;
+            font-size: 7.15pt;
+            line-height: 1.46;
           }
 
           .balance-list {
@@ -724,14 +731,14 @@ export function printReport({ chart, majorLuck, annualLuck, monthlyLuck, dailyLu
                   <p>現在の大運は${currentMajorLuck.ageStart}歳から${currentMajorLuck.ageEnd}歳まで、干支は${escapeHtml(currentMajorLuck.pillar.label)}、通変星は${escapeHtml(currentMajorLuck.pillar.tenGod)}です。立運は節入日より${majorLuck.start.dayNumber}日目生まれとして、${escapeHtml(majorLuck.start.formula)}を切り上げて算出しています。</p>
                 </div>
                 <h2>大運一覧</h2>
-                <table class="mini-table">
+                <table class="mini-table major-table">
                   <thead><tr><th>年齢</th><th>期間</th><th>干支</th><th>通変星</th></tr></thead>
                   <tbody>${tableRows(majorLuck.rows)}</tbody>
                 </table>
               </div>
               <div class="right">
                 <div class="report-header">
-                  <strong>鑑定文 続き</strong>
+                  <strong>鑑定文</strong>
                   <span>詳解</span>
                 </div>
                 <div class="text-grid">
@@ -753,7 +760,7 @@ export function printReport({ chart, majorLuck, annualLuck, monthlyLuck, dailyLu
                 ${annualLuckTables(annualLuck)}
               </div>
             </div>
-            <div class="footer">${escapeHtml(title)}　第三頁</div>
+            <div class="footer">${escapeHtml(title)}　年運</div>
           </section>
 
           ${monthlyLuckSheetHtml}
