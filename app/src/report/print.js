@@ -551,14 +551,14 @@ export function printReport({ chart, majorLuck, annualLuck, monthlyLuck, dailyLu
 
           .daily-luck-sheet .period-table th,
           .daily-luck-sheet .period-table td {
-            padding: 0.72mm 0.9mm;
-            font-size: 6.15pt;
-            line-height: 1.18;
+            padding: 1.05mm 1mm;
+            font-size: 6.6pt;
+            line-height: 1.34;
           }
 
           .daily-luck-sheet .period-table .reading-cell {
-            font-size: 6.05pt;
-            line-height: 1.22;
+            font-size: 6.45pt;
+            line-height: 1.38;
           }
 
           .balance-list {
