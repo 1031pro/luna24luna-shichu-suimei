@@ -91,7 +91,7 @@ export function generateInterpretation({ chart, majorLuck, annualLuck }) {
     },
     {
       title: "元命（月柱の蔵干通変星）",
-      body: `月柱の蔵干通変星、中心星である元命は${monthPillar.hiddenTenGod}です。元命は、その人が社会の中でどのような性質を中心に使いやすいか、仕事や人間関係で自然に表れやすい核を読み取る重要な星です。${GENMEI_TEXT[monthPillar.hiddenTenGod] || "元命は、社会的な場面で自然に出やすい性質や、人生の中心テーマを読み取るための重要な星です。命式全体とのバランスを見ながら、どのように力を使うと無理なく成果につながるかを確認していくことが大切です。"}`,
+      body: `元命は${monthPillar.hiddenTenGod}です。${GENMEI_TEXT[monthPillar.hiddenTenGod] || "社会的な場面で自然に出やすい性質を活かしながら、自分に合う役割や環境を選ぶことで力を発揮しやすくなります。命式全体とのバランスを見ながら、無理なく成果につながる動き方を整えていくことが大切です。"}`,
     },
     {
       title: "五行の傾向",
