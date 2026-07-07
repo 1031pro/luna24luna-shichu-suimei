@@ -517,9 +517,9 @@ export function printReport({ chart, majorLuck, annualLuck, monthlyLuck, dailyLu
 
           .annual-table th,
           .annual-table td {
-            padding: 1.35mm 0.65mm;
-            font-size: 6.9pt;
-            line-height: 1.32;
+            padding: 1.12mm 0.62mm;
+            font-size: 6.75pt;
+            line-height: 1.26;
           }
 
           .period-luck-sheet .content {
