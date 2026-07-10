@@ -174,6 +174,7 @@ function renderMajorLuck(luck) {
               <th>期間</th>
               <th>干支</th>
               <th>通変星</th>
+              <th>十二運</th>
             </tr>
           </thead>
           <tbody>
@@ -185,6 +186,7 @@ function renderMajorLuck(luck) {
                     <td>${row.yearStart}-${row.yearEnd}年</td>
                     <td>${escapeHtml(row.pillar.label)}</td>
                     <td>${escapeHtml(row.pillar.tenGod)}</td>
+                    <td>${escapeHtml(row.pillar.twelveStage)}</td>
                   </tr>
                 `,
               )
@@ -211,6 +213,7 @@ function renderAnnualLuck(rows) {
               <th>年齢</th>
               <th>干支</th>
               <th>通変星</th>
+              <th>十二運</th>
             </tr>
           </thead>
           <tbody>
@@ -222,6 +225,7 @@ function renderAnnualLuck(rows) {
                     <td>${row.age}歳</td>
                     <td>${escapeHtml(row.pillar.label)}</td>
                     <td>${escapeHtml(row.pillar.tenGod)}</td>
+                    <td>${escapeHtml(row.pillar.twelveStage)}</td>
                   </tr>
                 `,
               )
@@ -247,6 +251,7 @@ function renderPeriodLuck({ id, title, subtitle, rows, firstColumnLabel, firstCo
               <th>${escapeHtml(firstColumnLabel)}</th>
               <th>干支</th>
               <th>通変星</th>
+              <th>十二運</th>
               <th>鑑定文</th>
             </tr>
           </thead>
@@ -258,6 +263,7 @@ function renderPeriodLuck({ id, title, subtitle, rows, firstColumnLabel, firstCo
                     <td data-label="${escapeHtml(firstColumnLabel)}">${escapeHtml(firstColumn(row))}</td>
                     <td data-label="干支">${escapeHtml(row.pillar.label)}</td>
                     <td data-label="通変星">${escapeHtml(row.pillar.tenGod)}</td>
+                    <td data-label="十二運">${escapeHtml(row.pillar.twelveStage)}</td>
                     <td data-label="鑑定文" class="reading-cell">${escapeHtml(row.reading)}</td>
                   </tr>
                 `,

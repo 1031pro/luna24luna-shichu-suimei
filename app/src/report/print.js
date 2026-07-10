@@ -69,6 +69,7 @@ function tableRows(rows, limit = rows.length) {
           <td>${"year" in row ? `${row.age}歳` : `${row.yearStart}-${row.yearEnd}年`}</td>
           <td>${escapeHtml(row.pillar.label)}</td>
           <td>${escapeHtml(row.pillar.tenGod)}</td>
+          <td>${escapeHtml(row.pillar.twelveStage)}</td>
         </tr>
       `,
     )
@@ -88,7 +89,7 @@ function annualLuckTables(rows) {
         <div class="annual-column">
           <h3>${first.age}歳-${last.age}歳</h3>
           <table class="mini-table annual-table">
-            <thead><tr><th>年</th><th>年齢</th><th>干支</th><th>通変星</th></tr></thead>
+            <thead><tr><th>年</th><th>年齢</th><th>干支</th><th>通変星</th><th>十二運</th></tr></thead>
             <tbody>${tableRows(chunk)}</tbody>
           </table>
         </div>
@@ -105,6 +106,7 @@ function periodLuckRows(rows, firstCell, { highlightActive = true } = {}) {
           <td>${escapeHtml(firstCell(row))}</td>
           <td>${escapeHtml(row.pillar.label)}</td>
           <td>${escapeHtml(row.pillar.tenGod)}</td>
+          <td>${escapeHtml(row.pillar.twelveStage)}</td>
           <td class="reading-cell">${escapeHtml(row.reading)}</td>
         </tr>
       `,
@@ -124,7 +126,7 @@ function monthlyLuckSheet(rows, title) {
         </div>
         <h2>月運一覧</h2>
         <table class="period-table">
-          <thead><tr><th>年月</th><th>干支</th><th>通変星</th><th>鑑定文</th></tr></thead>
+          <thead><tr><th>年月</th><th>干支</th><th>通変星</th><th>十二運</th><th>鑑定文</th></tr></thead>
           <tbody>${periodLuckRows(rows, (row) => `${row.year}年${row.month}月`, { highlightActive: false })}</tbody>
         </table>
       </div>
@@ -147,7 +149,7 @@ function dailyLuckSheets(rows, title) {
             </div>
             <h2>日運一覧 ${first.year}年${first.month}月</h2>
             <table class="period-table">
-              <thead><tr><th>日</th><th>干支</th><th>通変星</th><th>鑑定文</th></tr></thead>
+              <thead><tr><th>日</th><th>干支</th><th>通変星</th><th>十二運</th><th>鑑定文</th></tr></thead>
               <tbody>${periodLuckRows(chunk, (row) => `${row.day}日（${row.weekday}）`, { highlightActive: false })}</tbody>
             </table>
           </div>
@@ -517,9 +519,9 @@ export function printReport({ chart, majorLuck, annualLuck, monthlyLuck, dailyLu
 
           .annual-table th,
           .annual-table td {
-            padding: 1.12mm 0.62mm;
-            font-size: 6.75pt;
-            line-height: 1.26;
+            padding: 1.08mm 0.46mm;
+            font-size: 6.45pt;
+            line-height: 1.24;
           }
 
           .period-luck-sheet .content {
@@ -543,6 +545,11 @@ export function printReport({ chart, majorLuck, annualLuck, monthlyLuck, dailyLu
           .period-table th:nth-child(3),
           .period-table td:nth-child(3) {
             width: 22mm;
+          }
+
+          .period-table th:nth-child(4),
+          .period-table td:nth-child(4) {
+            width: 18mm;
           }
 
           .period-table .reading-cell {
@@ -728,11 +735,11 @@ export function printReport({ chart, majorLuck, annualLuck, monthlyLuck, dailyLu
                 </div>
                 <div class="panel flow-panel">
                   <h3>現在の大運</h3>
-                  <p>現在の大運は${currentMajorLuck.ageStart}歳から${currentMajorLuck.ageEnd}歳まで、干支は${escapeHtml(currentMajorLuck.pillar.label)}、通変星は${escapeHtml(currentMajorLuck.pillar.tenGod)}です。立運は節入日より${majorLuck.start.dayNumber}日目生まれとして、${escapeHtml(majorLuck.start.formula)}を切り上げて算出しています。</p>
+                  <p>現在の大運は${currentMajorLuck.ageStart}歳から${currentMajorLuck.ageEnd}歳まで、干支は${escapeHtml(currentMajorLuck.pillar.label)}、通変星は${escapeHtml(currentMajorLuck.pillar.tenGod)}、十二運は${escapeHtml(currentMajorLuck.pillar.twelveStage)}です。立運は節入日より${majorLuck.start.dayNumber}日目生まれとして、${escapeHtml(majorLuck.start.formula)}を切り上げて算出しています。</p>
                 </div>
                 <h2>大運一覧</h2>
                 <table class="mini-table major-table">
-                  <thead><tr><th>年齢</th><th>期間</th><th>干支</th><th>通変星</th></tr></thead>
+                  <thead><tr><th>年齢</th><th>期間</th><th>干支</th><th>通変星</th><th>十二運</th></tr></thead>
                   <tbody>${tableRows(majorLuck.rows)}</tbody>
                 </table>
               </div>

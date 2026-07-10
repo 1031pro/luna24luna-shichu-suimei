@@ -30,6 +30,14 @@ if (monthlyLuck.length !== 12 || monthlyLuck[0].pillar.label !== "甲午") {
 if (dailyLuck.length !== 31 || dailyLuck[0].pillar.label !== "丙子") {
   throw new Error("daily luck should cover every day in the selected month");
 }
+if (
+  !majorLuck.rows[0].pillar.twelveStage ||
+  !annualLuck[0].pillar.twelveStage ||
+  !monthlyLuck[0].pillar.twelveStage ||
+  !dailyLuck[0].pillar.twelveStage
+) {
+  throw new Error("luck rows should include twelve stages");
+}
 
 console.log(chart.pillars.map((pillar) => `${pillar.pillarLabel}:${pillar.stem}${pillar.branch}`).join(", "));
 console.log(

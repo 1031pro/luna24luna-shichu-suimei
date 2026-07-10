@@ -1,4 +1,4 @@
-import { getBranchIndex, getKanshi, getTenGod, normalizeMod, STEMS, YIN_YANG } from "../data/kanshi.js";
+import { getBranchIndex, getKanshi, getTenGod, getTwelveStage, normalizeMod, STEMS, YIN_YANG } from "../data/kanshi.js";
 import { getAnnualPillar, getDayPillar } from "./chart.js";
 import { getKurokawaLuckDirection, getKurokawaMajorLuckStart } from "./kurokawa.js";
 
@@ -29,6 +29,7 @@ function enrichLuckPillar(pillar, dayStemIndex) {
   return {
     ...pillar,
     tenGod: getTenGod(dayStemIndex, pillar.stemIndex),
+    twelveStage: getTwelveStage(STEMS[dayStemIndex], pillar.branch),
   };
 }
 
@@ -97,6 +98,7 @@ export function calculateAnnualLuck(chart, currentYear, maxAge = 100) {
       pillar: {
         ...pillar,
         tenGod: getTenGod(dayStemIndex, pillar.stemIndex),
+        twelveStage: getTwelveStage(STEMS[dayStemIndex], pillar.branch),
         stemYinYang: YIN_YANG[pillar.stemIndex],
         stem: STEMS[pillar.stemIndex],
       },
