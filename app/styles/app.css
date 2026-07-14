@@ -1408,6 +1408,74 @@ tbody th,
   border-radius: 8px;
 }
 
+.partner-birth-field {
+  display: grid;
+  gap: 12px;
+}
+
+.compatibility-chart-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.compatibility-chart-grid .result-block {
+  margin-top: 12px;
+}
+
+.compatibility-check-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.compatibility-check-card {
+  min-width: 0;
+  padding: 12px;
+  background: #fff8dc;
+  border: 1px solid #ead69a;
+  border-radius: 8px;
+}
+
+.compatibility-check-card h3 {
+  margin: 0 0 8px;
+  color: #7a5500;
+  font-size: 0.92rem;
+}
+
+.compatibility-check-card p,
+.compatibility-balance-block p {
+  margin: 0;
+  color: #3f3a33;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+
+.compatibility-check-card p + p {
+  margin-top: 6px;
+}
+
+.compatibility-check-card .compatibility-check-note {
+  margin-top: 8px;
+  padding-top: 8px;
+  color: #705711;
+  font-size: 0.82rem;
+  border-top: 1px solid #ead69a;
+}
+
+.compatibility-check-card strong {
+  color: #1f1a0a;
+}
+
+.cross-pillar-table table {
+  min-width: 680px;
+}
+
+.cross-pillar-table td {
+  white-space: normal;
+}
+
 @media (max-width: 900px) {
   .results-panel {
     max-width: none;
@@ -1472,6 +1540,57 @@ tbody th,
 
   .balance-grid {
     grid-template-columns: 1fr;
+  }
+
+  .compatibility-chart-grid,
+  .compatibility-check-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .compatibility-chart-grid .result-block {
+    margin-top: 12px;
+  }
+
+  .cross-pillar-table {
+    overflow: visible;
+    background: transparent;
+    border: 0;
+  }
+
+  .cross-pillar-table table,
+  .cross-pillar-table tbody,
+  .cross-pillar-table tr,
+  .cross-pillar-table td {
+    display: block;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .cross-pillar-table thead {
+    display: none;
+  }
+
+  .cross-pillar-table tr {
+    margin-bottom: 10px;
+    overflow: hidden;
+    background: #fffdf4;
+    border: 1px solid #f1d575;
+    border-radius: 8px;
+  }
+
+  .cross-pillar-table td {
+    display: grid;
+    grid-template-columns: 72px minmax(0, 1fr);
+    gap: 10px;
+    padding: 8px 10px;
+    text-align: left;
+    border-right: 0;
+  }
+
+  .cross-pillar-table td::before {
+    color: #8a6400;
+    font-weight: 900;
+    content: attr(data-label);
   }
 }
 

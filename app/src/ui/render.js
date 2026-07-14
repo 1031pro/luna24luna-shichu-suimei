@@ -52,7 +52,7 @@ function coloredCell(value, className = elementClass(value)) {
   return `<td class="${className}">${escapeHtml(value)}</td>`;
 }
 
-function renderPillarTable(chart) {
+function renderPillarTable(chart, title = "命式表") {
   const displayOrder = ["time", "day", "month", "year"];
   const pillars = displayOrder.map((key) => chart.pillarMap[key]).filter(Boolean);
   const header = pillars
@@ -73,7 +73,7 @@ function renderPillarTable(chart) {
   return `
     <section class="result-block chart-block">
       <div class="section-title">
-        <h2>命式表</h2>
+        <h2>${escapeHtml(title)}</h2>
       </div>
       <div class="table-wrap">
         <table class="meishiki-table">
@@ -301,7 +301,144 @@ function renderDailyLuck(rows) {
   });
 }
 
-export function renderResult(target, { chart, majorLuck, annualLuck, monthlyLuck, dailyLuck, profile, interpretation = [] }) {
+function relationLabel(relation) {
+  return {
+    比和: "同じ五行",
+    生じる: "あなたが生じる",
+    生じられる: "お相手が生じる",
+    剋す: "あなたが剋す",
+    剋される: "お相手が剋す",
+  }[relation] || relation;
+}
+
+function formationText(formations) {
+  if (!formations.length) return "該当なし";
+  return formations
+    .map((formation) => {
+      const members = formation.members
+        .map((member) => `${member.branch}（${member.sources.map((source) => `${source.person}${source.pillar}`).join("・")}）`)
+        .join("・");
+      return `${formation.label}: ${members}`;
+    })
+    .join(" / ");
+}
+
+function voidOverlapText(overlap) {
+  const parts = [
+    ...overlap.secondInFirstVoid.map((item) => `${item}があなたの空亡`),
+    ...overlap.firstInSecondVoid.map((item) => `${item}がお相手の空亡`),
+  ];
+  return parts.length ? parts.join(" / ") : "相手の空亡への直接の重なりはなし";
+}
+
+function renderCompatibilityInterpretation(readings) {
+  return `
+    <section class="result-block interpretation-block compatibility-interpretation">
+      <div class="section-title"><h2>鑑定文</h2><span>相性の確認項目を文章で読む</span></div>
+      <div class="interpretation-list">
+        ${readings
+          .map(
+            (item) => `
+              <article>
+                <h3>${escapeHtml(item.title)}</h3>
+                <p>${escapeHtml(item.body)}</p>
+              </article>
+            `,
+          )
+          .join("")}
+      </div>
+    </section>
+  `;
+}
+
+function renderCompatibility({ chart, partnerChart, compatibility }) {
+  const firstName = chart.input.customerName || "あなた";
+  const secondName = partnerChart.input.customerName || "お相手";
+  const stemCombinations = compatibility.stemCombinations.length
+    ? compatibility.stemCombinations
+      .map((item) => `${item.firstLabel}${item.firstPillar.stem} × ${item.secondLabel}${item.secondPillar.stem}`)
+      .join(" / ")
+    : "該当なし";
+  const crossRows = compatibility.crossRelations
+    .map((item) => {
+      const signals = [
+        `五行：${item.stemRelation}`,
+        item.stemCombination ? "干合" : "",
+        item.branchRelation !== "—" ? `地支：${item.branchRelation}` : "",
+      ].filter(Boolean).join(" / ");
+      return `<tr>
+        <td data-label="${escapeHtml(firstName)}">${escapeHtml(item.firstLabel)}</td>
+        <td data-label="干支">${escapeHtml(item.firstPillar.kanshiLabel)}</td>
+        <td data-label="${escapeHtml(secondName)}">${escapeHtml(item.secondLabel)}</td>
+        <td data-label="干支">${escapeHtml(item.secondPillar.kanshiLabel)}</td>
+        <td data-label="照合結果">${escapeHtml(signals)}</td>
+      </tr>`;
+    })
+    .join("");
+
+  return `
+    <div id="chart-section" class="app-preview-header">
+      <div class="app-mark" aria-hidden="true">◇</div>
+      <strong>四柱推命 相性診断</strong>
+      <button type="button" class="date-edit-button" data-edit-input>入力を変更</button>
+    </div>
+    <div class="result-summary compatibility-summary">
+      <div>
+        <p class="eyebrow">相性確認</p>
+        <h1>${escapeHtml(firstName)} × ${escapeHtml(secondName)}</h1>
+        <p>${formatDate(chart.date)} ／ ${formatDate(partnerChart.date)}</p>
+      </div>
+    </div>
+    <section class="compatibility-chart-grid" aria-label="二人の命式表">
+      ${renderPillarTable(chart, `${firstName}の命式表`)}
+      ${renderPillarTable(partnerChart, `${secondName}の命式表`)}
+    </section>
+    <section class="result-block compatibility-checks" aria-label="相性確認項目">
+      <div class="section-title"><h2>相性確認項目</h2><span>命式全体をもとに照合</span></div>
+      <div class="compatibility-check-grid">
+        <article class="compatibility-check-card">
+          <h3>空亡</h3>
+          <p>${escapeHtml(firstName)}: <strong>${escapeHtml(chart.voidBranches.join("・"))}</strong></p>
+          <p>${escapeHtml(secondName)}: <strong>${escapeHtml(partnerChart.voidBranches.join("・"))}</strong></p>
+          <p class="compatibility-check-note">重なり: ${escapeHtml(voidOverlapText(compatibility.voidOverlap))}</p>
+        </article>
+        <article class="compatibility-check-card">
+          <h3>日干・日支</h3>
+          <p>日干: <strong>${escapeHtml(compatibility.firstDay.stem)} × ${escapeHtml(compatibility.secondDay.stem)}</strong>（${escapeHtml(relationLabel(compatibility.stemRelation))}${compatibility.dayStemCombination ? "・干合" : ""}）</p>
+          <p>日支: <strong>${escapeHtml(compatibility.firstDay.branch)} × ${escapeHtml(compatibility.secondDay.branch)}</strong>（${escapeHtml(compatibility.dayBranchRelation)}）</p>
+        </article>
+        <article class="compatibility-check-card">
+          <h3>干合</h3>
+          <p>${escapeHtml(stemCombinations)}</p>
+        </article>
+        <article class="compatibility-check-card">
+          <h3>三合会局</h3>
+          <p>${escapeHtml(formationText(compatibility.threeHarmonies))}</p>
+        </article>
+        <article class="compatibility-check-card">
+          <h3>方合</h3>
+          <p>${escapeHtml(formationText(compatibility.directionalCombinations))}</p>
+        </article>
+      </div>
+    </section>
+    ${renderCompatibilityInterpretation(compatibility.readings)}
+    <section class="result-block cross-pillar-block">
+      <div class="section-title"><h2>年・月・日柱の照合一覧</h2><span>干合・地支関係を含む9通りの比較</span></div>
+      <div class="table-wrap cross-pillar-table">
+        <table>
+          <thead><tr><th>${escapeHtml(firstName)}</th><th>干支</th><th>${escapeHtml(secondName)}</th><th>干支</th><th>照合結果</th></tr></thead>
+          <tbody>${crossRows}</tbody>
+        </table>
+      </div>
+    </section>
+  `;
+}
+
+export function renderResult(target, { mode = "chart", chart, partnerChart, compatibility, majorLuck, annualLuck, monthlyLuck, dailyLuck, profile, interpretation = [] }) {
+  if (mode === "compatibility") {
+    target.innerHTML = renderCompatibility({ chart, partnerChart, compatibility });
+    return;
+  }
   const birthTimeLabel = chart.input.unknownTime
     ? "出生時刻なし"
     : `${String(chart.input.hour).padStart(2, "0")}:${String(chart.input.minute).padStart(2, "0")}`;

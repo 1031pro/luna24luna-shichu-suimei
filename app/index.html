@@ -22,6 +22,14 @@
         </div>
 
         <form id="birth-form" class="birth-form">
+          <fieldset class="mode-picker">
+            <legend>利用する機能</legend>
+            <div class="segmented">
+              <label><input type="radio" name="mode" value="chart" checked /><span>命式鑑定</span></label>
+              <label><input type="radio" name="mode" value="compatibility" /><span>相性診断</span></label>
+            </div>
+          </fieldset>
+
           <label class="report-name-field">
             <span>お名前</span>
             <input id="customer-name" name="customerName" type="text" autocomplete="name" placeholder="未入力可" />
@@ -29,7 +37,7 @@
           </label>
 
           <fieldset>
-            <legend>生年月日</legend>
+            <legend>あなたの生年月日</legend>
             <div class="date-grid">
               <label>
                 <span>年</span>
@@ -52,7 +60,7 @@
             </div>
           </fieldset>
 
-          <fieldset>
+          <fieldset class="chart-only">
             <legend>出生時刻</legend>
             <div class="time-row">
               <label>
@@ -74,7 +82,7 @@
             </div>
           </fieldset>
 
-          <fieldset>
+          <fieldset class="chart-only">
             <legend>性別</legend>
             <div class="segmented">
               <label>
@@ -88,12 +96,12 @@
             </div>
           </fieldset>
 
-          <label class="current-year">
+          <label class="current-year chart-only">
             <span>年運の基準年</span>
             <input id="current-year" name="currentYear" type="number" min="1900" max="2200" value="2026" />
           </label>
 
-          <fieldset>
+          <fieldset class="chart-only">
             <legend>月運・日運</legend>
             <div class="date-grid luck-date-grid">
               <label>
@@ -123,7 +131,29 @@
             </div>
           </fieldset>
 
-          <button type="submit">命式を表示</button>
+          <fieldset id="partner-birth-field" class="partner-birth-field" hidden>
+            <legend>お相手の生年月日</legend>
+            <label class="report-name-field">
+              <span>お相手のお名前</span>
+              <input id="partner-name" name="partnerName" type="text" autocomplete="name" placeholder="未入力可" />
+            </label>
+            <div class="date-grid">
+              <label>
+                <span>年</span>
+                <select id="partner-year" name="partnerYear" required></select>
+              </label>
+              <label>
+                <span>月</span>
+                <select id="partner-month" name="partnerMonth" required></select>
+              </label>
+              <label>
+                <span>日</span>
+                <select id="partner-day" name="partnerDay" required></select>
+              </label>
+            </div>
+          </fieldset>
+
+          <button id="submit-button" type="submit">命式を表示</button>
         </form>
       </section>
 

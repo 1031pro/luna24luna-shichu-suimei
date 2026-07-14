@@ -1,5 +1,6 @@
 import { setsuiri } from "../../data/setsuiri/setsuiri-1900-2200.js";
 import { calculateChart } from "../src/engine/chart.js";
+import { calculateCompatibility } from "../src/engine/compatibility.js";
 import { calculateAnnualLuck, calculateDailyLuck, calculateMajorLuck, calculateMonthlyLuck } from "../src/engine/luck.js";
 
 const input = {
@@ -37,6 +38,39 @@ if (
   !dailyLuck[0].pillar.twelveStage
 ) {
   throw new Error("luck rows should include twelve stages");
+}
+
+const partnerChart = calculateChart({ ...input, year: 1992, month: 6, day: 15 }, setsuiri);
+const compatibility = calculateCompatibility(chart, partnerChart);
+if (compatibility.crossRelations.length !== 9) {
+  throw new Error("compatibility should compare all year, month, and day pillar pairs");
+}
+if (!Array.isArray(compatibility.threeHarmonies) || !Array.isArray(compatibility.directionalCombinations)) {
+  throw new Error("compatibility should include three-harmony and directional-combination checks");
+}
+if (compatibility.readings.length !== 6 || !compatibility.readings.every((item) => item.title && item.body)) {
+  throw new Error("compatibility should include written readings for every key check");
+}
+
+const directionalChart = {
+  ...chart,
+  pillarMap: {
+    ...chart.pillarMap,
+    year: { ...chart.pillarMap.year, stem: "甲", branch: "寅" },
+    month: { ...chart.pillarMap.month, stem: "己", branch: "卯" },
+    day: { ...chart.pillarMap.day, stem: "己", branch: "辰" },
+  },
+};
+const reverseStemPartner = {
+  ...partnerChart,
+  pillarMap: {
+    ...partnerChart.pillarMap,
+    day: { ...partnerChart.pillarMap.day, stem: "甲" },
+  },
+};
+const directionalCompatibility = calculateCompatibility(directionalChart, reverseStemPartner);
+if (!directionalCompatibility.dayStemCombination || directionalCompatibility.directionalCombinations.length !== 1) {
+  throw new Error("compatibility should detect reversed stem combinations and directional combinations");
 }
 
 console.log(chart.pillars.map((pillar) => `${pillar.pillarLabel}:${pillar.stem}${pillar.branch}`).join(", "));
