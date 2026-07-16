@@ -294,7 +294,10 @@ function makeCriteria(compatibility) {
       title: "相手に自己の調候用神",
       matched: compatibility.firstUseGodMatch.length > 0 && compatibility.secondUseGodMatch.length > 0,
       status: useGodMatchStatus(compatibility),
-      detail: `あなた（${compatibility.firstUseGod.season}生まれ${compatibility.firstUseGod.dayStem}）: ${compatibility.firstUseGod.stems.join("・")} → お相手: ${compatibility.firstUseGodMatch.join("・") || "なし"} / お相手（${compatibility.secondUseGod.season}生まれ${compatibility.secondUseGod.dayStem}）: ${compatibility.secondUseGod.stems.join("・")} → あなた: ${compatibility.secondUseGodMatch.join("・") || "なし"}`,
+      detailLines: [
+        `あなた（${compatibility.firstUseGod.season}生まれ${compatibility.firstUseGod.dayStem}）: ${compatibility.firstUseGod.stems.join("・")} → お相手: ${compatibility.firstUseGodMatch.join("・") || "なし"}`,
+        `お相手（${compatibility.secondUseGod.season}生まれ${compatibility.secondUseGod.dayStem}）: ${compatibility.secondUseGod.stems.join("・")} → あなた: ${compatibility.secondUseGodMatch.join("・") || "なし"}`,
+      ],
     },
     {
       title: "元命の相剋",

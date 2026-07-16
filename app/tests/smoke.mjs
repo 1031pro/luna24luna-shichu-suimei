@@ -60,6 +60,9 @@ if (!compatibility.criteria.some((item) => item.title === "相手に自己の調
 if (compatibility.criteria.find((item) => item.title === "相手に自己の調候用神").status !== "双方になし") {
   throw new Error("compatibility should distinguish when neither partner has the other's use god");
 }
+if (compatibility.criteria.find((item) => item.title === "相手に自己の調候用神").detailLines.length !== 2) {
+  throw new Error("compatibility should show each person's seasonal use-god result on a separate line");
+}
 
 const timedChart = calculateChart({ ...input, unknownTime: false, hour: 8, minute: 30 }, setsuiri);
 const timedPartnerChart = calculateChart({ ...input, year: 1992, month: 6, day: 15, unknownTime: false, hour: 20, minute: 30 }, setsuiri);

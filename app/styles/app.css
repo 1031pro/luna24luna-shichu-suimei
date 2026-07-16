@@ -1456,6 +1456,17 @@ tbody th,
   margin-top: 6px;
 }
 
+.compatibility-criterion-detail-lines {
+  display: grid;
+  gap: 6px;
+}
+
+.compatibility-criterion-detail-lines p + p {
+  margin-top: 0;
+  padding-top: 6px;
+  border-top: 1px solid #ead69a;
+}
+
 .compatibility-check-card .compatibility-check-note {
   margin-top: 8px;
   padding-top: 8px;

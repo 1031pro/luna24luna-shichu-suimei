@@ -370,7 +370,9 @@ function renderCompatibilityCriteria(chart, partnerChart, compatibility) {
                   <h3>${escapeHtml(item.title)}</h3>
                   <strong>${escapeHtml(item.status)}</strong>
                 </div>
-                <p>${escapeHtml(item.detail)}</p>
+                ${item.detailLines
+                  ? `<div class="compatibility-criterion-detail-lines">${item.detailLines.map((line) => `<p>${escapeHtml(line)}</p>`).join("")}</div>`
+                  : `<p>${escapeHtml(item.detail)}</p>`}
               </article>
             `,
           )
