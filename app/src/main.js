@@ -28,6 +28,9 @@ const partnerNameInput = document.querySelector("#partner-name");
 const partnerYearSelect = document.querySelector("#partner-year");
 const partnerMonthSelect = document.querySelector("#partner-month");
 const partnerDaySelect = document.querySelector("#partner-day");
+const partnerHourSelect = document.querySelector("#partner-hour");
+const partnerMinuteSelect = document.querySelector("#partner-minute");
+const partnerUnknownTime = document.querySelector("#partner-unknown-time");
 const submitButton = document.querySelector("#submit-button");
 
 let currentReport = null;
@@ -74,9 +77,10 @@ function setModeState() {
 }
 
 function setTimeControlsState() {
-  const disabled = unknownTime.checked;
-  hourSelect.disabled = disabled;
-  minuteSelect.disabled = disabled;
+  hourSelect.disabled = unknownTime.checked;
+  minuteSelect.disabled = unknownTime.checked;
+  partnerHourSelect.disabled = partnerUnknownTime.checked;
+  partnerMinuteSelect.disabled = partnerUnknownTime.checked;
 }
 
 function readInput() {
@@ -105,9 +109,9 @@ function readPartnerInput() {
     year: Number(data.get("partnerYear")),
     month: Number(data.get("partnerMonth")),
     day: Number(data.get("partnerDay")),
-    hour: 12,
-    minute: 0,
-    unknownTime: true,
+    hour: Number(data.get("partnerHour") || 12),
+    minute: Number(data.get("partnerMinute") || 0),
+    unknownTime: data.get("partnerUnknownTime") === "on",
     sex: "male",
     currentYear: Number(data.get("currentYear")),
   };
@@ -116,7 +120,7 @@ function readPartnerInput() {
 function calculateAndRender() {
   const input = readInput();
   const compatibilityMode = selectedMode() === "compatibility";
-  const chart = calculateChart(compatibilityMode ? { ...input, unknownTime: true } : input, setsuiri);
+  const chart = calculateChart(input, setsuiri);
   if (compatibilityMode) {
     const partnerChart = calculateChart(readPartnerInput(), setsuiri);
     const compatibility = calculateCompatibility(chart, partnerChart);
@@ -174,6 +178,8 @@ function initForm() {
   fillSelect(dailyLuckMonthSelect, Array.from({ length: 12 }, (_, i) => i + 1), today.getMonth() + 1);
   fillSelect(partnerYearSelect, Array.from({ length: 301 }, (_, i) => 1900 + i), 1990);
   fillSelect(partnerMonthSelect, Array.from({ length: 12 }, (_, i) => i + 1), 1);
+  fillSelect(partnerHourSelect, Array.from({ length: 24 }, (_, i) => i), 12);
+  fillSelect(partnerMinuteSelect, Array.from({ length: 60 }, (_, i) => i), 0);
   currentYearInput.value = today.getFullYear();
   customerNameInput.value = "";
   updateDays();
@@ -187,6 +193,7 @@ monthSelect.addEventListener("change", updateDays);
 partnerYearSelect.addEventListener("change", updatePartnerDays);
 partnerMonthSelect.addEventListener("change", updatePartnerDays);
 unknownTime.addEventListener("change", setTimeControlsState);
+partnerUnknownTime.addEventListener("change", setTimeControlsState);
 modeInputs.forEach((input) => input.addEventListener("change", setModeState));
 form.addEventListener("submit", (event) => {
   event.preventDefault();

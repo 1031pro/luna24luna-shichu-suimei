@@ -48,18 +48,40 @@ if (compatibility.crossRelations.length !== 9) {
 if (!Array.isArray(compatibility.threeHarmonies) || !Array.isArray(compatibility.directionalCombinations)) {
   throw new Error("compatibility should include three-harmony and directional-combination checks");
 }
-if (compatibility.readings.length !== 6 || !compatibility.readings.every((item) => item.title && item.body)) {
+if (compatibility.criteria.length !== 9 || compatibility.readings.length !== 8 || !compatibility.readings.every((item) => item.title && item.body)) {
   throw new Error("compatibility should include written readings for every key check");
 }
+if (compatibility.firstUseGod.season !== "冬" || compatibility.firstUseGod.dayStem !== "丙" || compatibility.firstUseGod.stems.join("") !== "甲") {
+  throw new Error("compatibility should use the client-supplied seasonal use-god table");
+}
+if (!compatibility.criteria.some((item) => item.title === "相手に自己の調候用神")) {
+  throw new Error("compatibility should show the seasonal use-god criterion");
+}
+if (compatibility.criteria.find((item) => item.title === "相手に自己の調候用神").status !== "双方になし") {
+  throw new Error("compatibility should distinguish when neither partner has the other's use god");
+}
 
+const timedChart = calculateChart({ ...input, unknownTime: false, hour: 8, minute: 30 }, setsuiri);
+const timedPartnerChart = calculateChart({ ...input, year: 1992, month: 6, day: 15, unknownTime: false, hour: 20, minute: 30 }, setsuiri);
+const timedCompatibility = calculateCompatibility(timedChart, timedPartnerChart);
+if (timedCompatibility.crossRelations.length !== 16) {
+  throw new Error("compatibility should compare all four pillars when both birth times are known");
+}
+
+const directionalOverrides = {
+  year: { stem: "甲", branch: "寅" },
+  month: { stem: "己", branch: "卯" },
+  day: { stem: "己", branch: "辰" },
+};
 const directionalChart = {
   ...chart,
   pillarMap: {
     ...chart.pillarMap,
-    year: { ...chart.pillarMap.year, stem: "甲", branch: "寅" },
-    month: { ...chart.pillarMap.month, stem: "己", branch: "卯" },
-    day: { ...chart.pillarMap.day, stem: "己", branch: "辰" },
+    year: { ...chart.pillarMap.year, ...directionalOverrides.year },
+    month: { ...chart.pillarMap.month, ...directionalOverrides.month },
+    day: { ...chart.pillarMap.day, ...directionalOverrides.day },
   },
+  pillars: chart.pillars.map((pillar) => ({ ...pillar, ...directionalOverrides[pillar.key] })),
 };
 const reverseStemPartner = {
   ...partnerChart,
@@ -67,9 +89,10 @@ const reverseStemPartner = {
     ...partnerChart.pillarMap,
     day: { ...partnerChart.pillarMap.day, stem: "甲" },
   },
+  pillars: partnerChart.pillars.map((pillar) => (pillar.key === "day" ? { ...pillar, stem: "甲" } : pillar)),
 };
 const directionalCompatibility = calculateCompatibility(directionalChart, reverseStemPartner);
-if (!directionalCompatibility.dayStemCombination || directionalCompatibility.directionalCombinations.length !== 1) {
+if (!directionalCompatibility.dayStemCombination || directionalCompatibility.directionalCombinations.length !== 1 || directionalCompatibility.halfCombinations.length < 1) {
   throw new Error("compatibility should detect reversed stem combinations and directional combinations");
 }
 

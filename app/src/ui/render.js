@@ -351,14 +351,39 @@ function renderCompatibilityInterpretation(readings) {
   `;
 }
 
+function renderCompatibilityCriteria(chart, partnerChart, compatibility) {
+  return `
+    <section class="result-block compatibility-checks" aria-label="相性判定一覧">
+      <div class="section-title"><h2>相性判定一覧</h2><span>命式全体をもとに照合</span></div>
+      <div class="compatibility-check-grid compatibility-criteria-grid">
+        <article class="compatibility-check-card compatibility-void-card">
+          <h3>空亡</h3>
+          <p>あなた: <strong>${escapeHtml(chart.voidBranches.join("・"))}</strong></p>
+          <p>お相手: <strong>${escapeHtml(partnerChart.voidBranches.join("・"))}</strong></p>
+          <p class="compatibility-check-note">重なり: ${escapeHtml(voidOverlapText(compatibility.voidOverlap))}</p>
+        </article>
+        ${compatibility.criteria
+          .map(
+            (item) => `
+              <article class="compatibility-check-card compatibility-criterion-card ${item.matched ? "is-matched" : "is-unmatched"}">
+                <div class="compatibility-criterion-heading">
+                  <h3>${escapeHtml(item.title)}</h3>
+                  <strong>${escapeHtml(item.status)}</strong>
+                </div>
+                <p>${escapeHtml(item.detail)}</p>
+              </article>
+            `,
+          )
+          .join("")}
+      </div>
+    </section>
+  `;
+}
+
 function renderCompatibility({ chart, partnerChart, compatibility }) {
   const firstName = chart.input.customerName || "あなた";
   const secondName = partnerChart.input.customerName || "お相手";
-  const stemCombinations = compatibility.stemCombinations.length
-    ? compatibility.stemCombinations
-      .map((item) => `${item.firstLabel}${item.firstPillar.stem} × ${item.secondLabel}${item.secondPillar.stem}`)
-      .join(" / ")
-    : "該当なし";
+  const comparedPillars = chart.pillarMap.time && partnerChart.pillarMap.time ? "年・月・日・時柱" : "年・月・日柱";
   const crossRows = compatibility.crossRelations
     .map((item) => {
       const signals = [
@@ -393,37 +418,10 @@ function renderCompatibility({ chart, partnerChart, compatibility }) {
       ${renderPillarTable(chart, `${firstName}の命式表`)}
       ${renderPillarTable(partnerChart, `${secondName}の命式表`)}
     </section>
-    <section class="result-block compatibility-checks" aria-label="相性確認項目">
-      <div class="section-title"><h2>相性確認項目</h2><span>命式全体をもとに照合</span></div>
-      <div class="compatibility-check-grid">
-        <article class="compatibility-check-card">
-          <h3>空亡</h3>
-          <p>${escapeHtml(firstName)}: <strong>${escapeHtml(chart.voidBranches.join("・"))}</strong></p>
-          <p>${escapeHtml(secondName)}: <strong>${escapeHtml(partnerChart.voidBranches.join("・"))}</strong></p>
-          <p class="compatibility-check-note">重なり: ${escapeHtml(voidOverlapText(compatibility.voidOverlap))}</p>
-        </article>
-        <article class="compatibility-check-card">
-          <h3>日干・日支</h3>
-          <p>日干: <strong>${escapeHtml(compatibility.firstDay.stem)} × ${escapeHtml(compatibility.secondDay.stem)}</strong>（${escapeHtml(relationLabel(compatibility.stemRelation))}${compatibility.dayStemCombination ? "・干合" : ""}）</p>
-          <p>日支: <strong>${escapeHtml(compatibility.firstDay.branch)} × ${escapeHtml(compatibility.secondDay.branch)}</strong>（${escapeHtml(compatibility.dayBranchRelation)}）</p>
-        </article>
-        <article class="compatibility-check-card">
-          <h3>干合</h3>
-          <p>${escapeHtml(stemCombinations)}</p>
-        </article>
-        <article class="compatibility-check-card">
-          <h3>三合会局</h3>
-          <p>${escapeHtml(formationText(compatibility.threeHarmonies))}</p>
-        </article>
-        <article class="compatibility-check-card">
-          <h3>方合</h3>
-          <p>${escapeHtml(formationText(compatibility.directionalCombinations))}</p>
-        </article>
-      </div>
-    </section>
+    ${renderCompatibilityCriteria(chart, partnerChart, compatibility)}
     ${renderCompatibilityInterpretation(compatibility.readings)}
     <section class="result-block cross-pillar-block">
-      <div class="section-title"><h2>年・月・日柱の照合一覧</h2><span>干合・地支関係を含む9通りの比較</span></div>
+      <div class="section-title"><h2>${escapeHtml(comparedPillars)}の照合一覧</h2><span>干合・地支関係を含む${compatibility.crossRelations.length}通りの比較</span></div>
       <div class="table-wrap cross-pillar-table">
         <table>
           <thead><tr><th>${escapeHtml(firstName)}</th><th>干支</th><th>${escapeHtml(secondName)}</th><th>干支</th><th>照合結果</th></tr></thead>

@@ -1468,6 +1468,34 @@ tbody th,
   color: #1f1a0a;
 }
 
+.compatibility-criterion-heading {
+  display: flex;
+  gap: 8px;
+  align-items: start;
+  justify-content: space-between;
+}
+
+.compatibility-criterion-heading strong {
+  flex: 0 0 auto;
+  padding: 3px 7px;
+  color: #5f4700;
+  font-size: 0.75rem;
+  line-height: 1.2;
+  background: #fff3bd;
+  border: 1px solid #e6c354;
+  border-radius: 999px;
+}
+
+.compatibility-criterion-card.is-matched {
+  border-color: #d8ad2f;
+}
+
+.compatibility-criterion-card.is-matched .compatibility-criterion-heading strong {
+  color: #155f3a;
+  background: #e5f4df;
+  border-color: #8bbd78;
+}
+
 .cross-pillar-table table {
   min-width: 680px;
 }
