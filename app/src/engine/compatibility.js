@@ -74,7 +74,7 @@ function hasStemCombination(first, second) {
 
 function elementRelation(from, to) {
   const offset = (ELEMENTS.indexOf(to) - ELEMENTS.indexOf(from) + 5) % 5;
-  return ["比和", "生じる", "剋す", "生じられる", "剋される"][offset];
+  return ["比和", "生じる", "剋す", "剋される", "生じられる"][offset];
 }
 
 function getBranchRelation(first, second) {
@@ -279,6 +279,12 @@ function makeCriteria(compatibility) {
       detail: "日干の干合と日支の支合（六合）がともに成立",
     },
     {
+      title: "天戦地冲",
+      matched: compatibility.heavenEarthClash,
+      status: compatibility.heavenEarthClash ? "成立" : "不成立",
+      detail: `日干の相剋（${compatibility.stemRelation}）と日支の冲がともに成立`,
+    },
+    {
       title: "日支蔵干の干合",
       matched: compatibility.dayBranchHiddenStemCombination,
       status: compatibility.dayBranchHiddenStemCombination ? "あり" : "なし",
@@ -329,8 +335,8 @@ function makeReadings(first, second, compatibility) {
       body: `${dayStemReading(compatibility.stemRelation, firstName, secondName, compatibility.dayStemCombination)} 日干の陰陽は${compatibility.dayStemYinYangComplementary ? "異なるため、陰陽の組み合わせとして確認できます。" : "同じです。"}`,
     },
     {
-      title: "日支・天地徳合の関係",
-      body: `${dayBranchReading(compatibility.dayBranchRelation, compatibility.firstDay, compatibility.secondDay)} 天地徳合は${compatibility.heavenEarthVirtueCombination ? "成立しています。" : "成立していません。"}`,
+      title: "日支・天地徳合・天戦地冲の関係",
+      body: `${dayBranchReading(compatibility.dayBranchRelation, compatibility.firstDay, compatibility.secondDay)} 天地徳合は${compatibility.heavenEarthVirtueCombination ? "成立しています。" : "成立していません。"} 天戦地冲は${compatibility.heavenEarthClash ? "日干の相剋と日支の冲が重なり、成立しています。" : "成立していません。"}`,
     },
     {
       title: "日支蔵干・元命の関係",
@@ -379,6 +385,7 @@ export function calculateCompatibility(first, second) {
     dayStemCombination,
     dayBranchRelation,
     heavenEarthVirtueCombination: dayStemCombination && dayBranchRelation === "六合",
+    heavenEarthClash: (stemRelation === "剋す" || stemRelation === "剋される") && dayBranchRelation === "冲",
     dayBranchHiddenStemCombination: hasStemCombination(firstDay.mainHiddenStem, secondDay.mainHiddenStem),
     dayStemYinYangComplementary: firstDay.stemYinYang !== secondDay.stemYinYang,
     firstGenmei: {

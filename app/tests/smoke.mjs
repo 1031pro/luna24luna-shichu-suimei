@@ -48,7 +48,7 @@ if (compatibility.crossRelations.length !== 9) {
 if (!Array.isArray(compatibility.threeHarmonies) || !Array.isArray(compatibility.directionalCombinations)) {
   throw new Error("compatibility should include three-harmony and directional-combination checks");
 }
-if (compatibility.criteria.length !== 9 || compatibility.readings.length !== 8 || !compatibility.readings.every((item) => item.title && item.body)) {
+if (compatibility.criteria.length !== 10 || compatibility.readings.length !== 8 || !compatibility.readings.every((item) => item.title && item.body)) {
   throw new Error("compatibility should include written readings for every key check");
 }
 if (compatibility.firstUseGod.season !== "冬" || compatibility.firstUseGod.dayStem !== "丙" || compatibility.firstUseGod.stems.join("") !== "甲") {
@@ -97,6 +97,20 @@ const reverseStemPartner = {
 const directionalCompatibility = calculateCompatibility(directionalChart, reverseStemPartner);
 if (!directionalCompatibility.dayStemCombination || directionalCompatibility.directionalCombinations.length !== 1 || directionalCompatibility.halfCombinations.length < 1) {
   throw new Error("compatibility should detect reversed stem combinations and directional combinations");
+}
+
+const clashFirst = {
+  ...chart,
+  pillarMap: { ...chart.pillarMap, day: { ...chart.pillarMap.day, stem: "甲", branch: "子", stemElement: "木" } },
+  pillars: chart.pillars.map((pillar) => (pillar.key === "day" ? { ...pillar, stem: "甲", branch: "子", stemElement: "木" } : pillar)),
+};
+const clashSecond = {
+  ...partnerChart,
+  pillarMap: { ...partnerChart.pillarMap, day: { ...partnerChart.pillarMap.day, stem: "庚", branch: "午", stemElement: "金" } },
+  pillars: partnerChart.pillars.map((pillar) => (pillar.key === "day" ? { ...pillar, stem: "庚", branch: "午", stemElement: "金" } : pillar)),
+};
+if (!calculateCompatibility(clashFirst, clashSecond).heavenEarthClash) {
+  throw new Error("compatibility should detect heaven-earth clash when day stems conflict and day branches clash");
 }
 
 console.log(chart.pillars.map((pillar) => `${pillar.pillarLabel}:${pillar.stem}${pillar.branch}`).join(", "));

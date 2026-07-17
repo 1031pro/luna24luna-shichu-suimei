@@ -382,7 +382,34 @@ function renderCompatibilityCriteria(chart, partnerChart, compatibility) {
   `;
 }
 
-function renderCompatibility({ chart, partnerChart, compatibility }) {
+function sexLabel(sex) {
+  return sex === "female" ? "女性" : "男性";
+}
+
+function renderCompatibilityMajorLuck(chart, partnerChart, majorLuck, partnerMajorLuck) {
+  const renderCard = (title, sourceChart, luck) => {
+    const currentRow = luck.rows.find((row) => row.active) || luck.rows[0];
+    return `
+      <article class="compatibility-check-card compatibility-major-luck-card">
+        <h3>${escapeHtml(title)}</h3>
+        <p><strong>${sexLabel(sourceChart.input.sex)}・${escapeHtml(luck.direction.label)}</strong></p>
+        <p>立運: ${luck.start.age}歳（${escapeHtml(luck.start.formula)}）</p>
+        <p class="compatibility-check-note">現在: ${currentRow.ageStart}-${currentRow.ageEnd}歳 / ${escapeHtml(currentRow.pillar.label)}・${escapeHtml(currentRow.pillar.tenGod)}・${escapeHtml(currentRow.pillar.twelveStage)}</p>
+      </article>
+    `;
+  };
+  return `
+    <section class="result-block compatibility-major-luck-block" aria-label="二人の大運判定">
+      <div class="section-title"><h2>大運判定</h2><span>性別と年干の陰陽から算出</span></div>
+      <div class="compatibility-check-grid">
+        ${renderCard("あなたの大運", chart, majorLuck)}
+        ${renderCard("お相手の大運", partnerChart, partnerMajorLuck)}
+      </div>
+    </section>
+  `;
+}
+
+function renderCompatibility({ chart, partnerChart, compatibility, majorLuck, partnerMajorLuck }) {
   const firstName = chart.input.customerName || "あなた";
   const secondName = partnerChart.input.customerName || "お相手";
   const comparedPillars = chart.pillarMap.time && partnerChart.pillarMap.time ? "年・月・日・時柱" : "年・月・日柱";
@@ -420,6 +447,7 @@ function renderCompatibility({ chart, partnerChart, compatibility }) {
       ${renderPillarTable(chart, `${firstName}の命式表`)}
       ${renderPillarTable(partnerChart, `${secondName}の命式表`)}
     </section>
+    ${renderCompatibilityMajorLuck(chart, partnerChart, majorLuck, partnerMajorLuck)}
     ${renderCompatibilityCriteria(chart, partnerChart, compatibility)}
     ${renderCompatibilityInterpretation(compatibility.readings)}
     <section class="result-block cross-pillar-block">
@@ -434,9 +462,9 @@ function renderCompatibility({ chart, partnerChart, compatibility }) {
   `;
 }
 
-export function renderResult(target, { mode = "chart", chart, partnerChart, compatibility, majorLuck, annualLuck, monthlyLuck, dailyLuck, profile, interpretation = [] }) {
+export function renderResult(target, { mode = "chart", chart, partnerChart, compatibility, majorLuck, partnerMajorLuck, annualLuck, monthlyLuck, dailyLuck, profile, interpretation = [] }) {
   if (mode === "compatibility") {
-    target.innerHTML = renderCompatibility({ chart, partnerChart, compatibility });
+    target.innerHTML = renderCompatibility({ chart, partnerChart, compatibility, majorLuck, partnerMajorLuck });
     return;
   }
   const birthTimeLabel = chart.input.unknownTime

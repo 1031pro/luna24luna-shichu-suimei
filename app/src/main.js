@@ -112,7 +112,7 @@ function readPartnerInput() {
     hour: Number(data.get("partnerHour") || 12),
     minute: Number(data.get("partnerMinute") || 0),
     unknownTime: data.get("partnerUnknownTime") === "on",
-    sex: "male",
+    sex: data.get("partnerSex") || "male",
     currentYear: Number(data.get("currentYear")),
   };
 }
@@ -122,10 +122,13 @@ function calculateAndRender() {
   const compatibilityMode = selectedMode() === "compatibility";
   const chart = calculateChart(input, setsuiri);
   if (compatibilityMode) {
-    const partnerChart = calculateChart(readPartnerInput(), setsuiri);
+    const partnerInput = readPartnerInput();
+    const partnerChart = calculateChart(partnerInput, setsuiri);
     const compatibility = calculateCompatibility(chart, partnerChart);
+    const majorLuck = calculateMajorLuck(chart, setsuiri, input.currentYear);
+    const partnerMajorLuck = calculateMajorLuck(partnerChart, setsuiri, partnerInput.currentYear);
     currentReport = null;
-    renderResult(resultPanel, { mode: "compatibility", chart, partnerChart, compatibility });
+    renderResult(resultPanel, { mode: "compatibility", chart, partnerChart, compatibility, majorLuck, partnerMajorLuck });
     resultPanel.hidden = false;
     document.body.classList.add("result-mode");
     window.scrollTo({ top: 0, behavior: "instant" });
